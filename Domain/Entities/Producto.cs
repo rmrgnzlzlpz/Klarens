@@ -9,7 +9,10 @@ namespace Domain.Entities
         public List<ProductoBodega> ProductoBodegas { get; set; }
         public string Codigo { get; set; }
         public string Nombre { get; set; }
-        public double Precio { get; set; }
+        public double Precio { get => this.Precio; set {
+            Precio = value;
+            if (value < 0) this.Precio = 0;
+        }}
         public int Stock { get {
             if (ProductoBodegas == null) return 0;
             int total = 0;

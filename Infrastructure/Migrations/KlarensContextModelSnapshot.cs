@@ -19,7 +19,7 @@ namespace Infrastructure.Migrations
                 .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("Entities.Bodega", b =>
+            modelBuilder.Entity("Domain.Entities.Bodega", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -43,7 +43,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Bodegas");
                 });
 
-            modelBuilder.Entity("Entities.Categoria", b =>
+            modelBuilder.Entity("Domain.Entities.Categoria", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -64,7 +64,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Categorias");
                 });
 
-            modelBuilder.Entity("Entities.Compra", b =>
+            modelBuilder.Entity("Domain.Entities.Compra", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -103,7 +103,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Compras");
                 });
 
-            modelBuilder.Entity("Entities.CompraDetalle", b =>
+            modelBuilder.Entity("Domain.Entities.CompraDetalle", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -131,7 +131,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("CompraDetalles");
                 });
 
-            modelBuilder.Entity("Entities.Conductor", b =>
+            modelBuilder.Entity("Domain.Entities.Conductor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -151,7 +151,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Conductores");
                 });
 
-            modelBuilder.Entity("Entities.Deuda", b =>
+            modelBuilder.Entity("Domain.Entities.Deuda", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -177,7 +177,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Deudas");
                 });
 
-            modelBuilder.Entity("Entities.Devolucion", b =>
+            modelBuilder.Entity("Domain.Entities.Devolucion", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -211,7 +211,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Devoluciones");
                 });
 
-            modelBuilder.Entity("Entities.DevolucionDetalle", b =>
+            modelBuilder.Entity("Domain.Entities.DevolucionDetalle", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -236,7 +236,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("DevolucionDetalles");
                 });
 
-            modelBuilder.Entity("Entities.Distribucion", b =>
+            modelBuilder.Entity("Domain.Entities.Distribucion", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -263,7 +263,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Distribuciones");
                 });
 
-            modelBuilder.Entity("Entities.DistribucionDetalle", b =>
+            modelBuilder.Entity("Domain.Entities.DistribucionDetalle", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -285,7 +285,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("DistribucionDetalles");
                 });
 
-            modelBuilder.Entity("Entities.DistribucionVendedor", b =>
+            modelBuilder.Entity("Domain.Entities.DistribucionVendedor", b =>
                 {
                     b.Property<int>("VendedorId")
                         .HasColumnType("integer");
@@ -300,7 +300,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("DistribucionVendedores");
                 });
 
-            modelBuilder.Entity("Entities.Persona", b =>
+            modelBuilder.Entity("Domain.Entities.Persona", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -331,7 +331,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Personas");
                 });
 
-            modelBuilder.Entity("Entities.Producto", b =>
+            modelBuilder.Entity("Domain.Entities.Producto", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -353,9 +353,6 @@ namespace Infrastructure.Migrations
                     b.Property<double>("Precio")
                         .HasColumnType("double precision");
 
-                    b.Property<int>("Stock")
-                        .HasColumnType("integer");
-
                     b.Property<int?>("SubcategoriaId")
                         .HasColumnType("integer");
 
@@ -366,7 +363,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Productos");
                 });
 
-            modelBuilder.Entity("Entities.ProductoBodega", b =>
+            modelBuilder.Entity("Domain.Entities.ProductoBodega", b =>
                 {
                     b.Property<int>("BodegaId")
                         .HasColumnType("integer");
@@ -384,7 +381,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("ProductosBodegas");
                 });
 
-            modelBuilder.Entity("Entities.Proveedor", b =>
+            modelBuilder.Entity("Domain.Entities.Proveedor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -407,7 +404,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Proveedores");
                 });
 
-            modelBuilder.Entity("Entities.Rol", b =>
+            modelBuilder.Entity("Domain.Entities.Rol", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -428,7 +425,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("Entities.Ruta", b =>
+            modelBuilder.Entity("Domain.Entities.Ruta", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -440,7 +437,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Rutas");
                 });
 
-            modelBuilder.Entity("Entities.Subcategoria", b =>
+            modelBuilder.Entity("Domain.Entities.Subcategoria", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -466,7 +463,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Subcategorias");
                 });
 
-            modelBuilder.Entity("Entities.Usuario", b =>
+            modelBuilder.Entity("Domain.Entities.Usuario", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -500,7 +497,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Usuarios");
                 });
 
-            modelBuilder.Entity("Entities.Vehiculo", b =>
+            modelBuilder.Entity("Domain.Entities.Vehiculo", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -522,7 +519,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Vehiculos");
                 });
 
-            modelBuilder.Entity("Entities.Vendedor", b =>
+            modelBuilder.Entity("Domain.Entities.Vendedor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -539,7 +536,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Vendedores");
                 });
 
-            modelBuilder.Entity("Entities.Venta", b =>
+            modelBuilder.Entity("Domain.Entities.Venta", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -578,7 +575,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Ventas");
                 });
 
-            modelBuilder.Entity("Entities.VentaDetalle", b =>
+            modelBuilder.Entity("Domain.Entities.VentaDetalle", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -612,7 +609,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("VentaDetalles");
                 });
 
-            modelBuilder.Entity("ValueObjects.Comprobante", b =>
+            modelBuilder.Entity("Domain.ValueObjects.Comprobante", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -630,7 +627,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Comprobante");
                 });
 
-            modelBuilder.Entity("ValueObjects.Direccion", b =>
+            modelBuilder.Entity("Domain.ValueObjects.Direccion", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -657,207 +654,207 @@ namespace Infrastructure.Migrations
                     b.ToTable("Direccion");
                 });
 
-            modelBuilder.Entity("Entities.Compra", b =>
+            modelBuilder.Entity("Domain.Entities.Compra", b =>
                 {
-                    b.HasOne("ValueObjects.Comprobante", "Comprobante")
+                    b.HasOne("Domain.ValueObjects.Comprobante", "Comprobante")
                         .WithMany()
                         .HasForeignKey("ComprobanteId");
 
-                    b.HasOne("Entities.Proveedor", "Proveedor")
+                    b.HasOne("Domain.Entities.Proveedor", "Proveedor")
                         .WithMany()
                         .HasForeignKey("ProveedorId");
 
-                    b.HasOne("Entities.Usuario", "Usuario")
+                    b.HasOne("Domain.Entities.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId");
                 });
 
-            modelBuilder.Entity("Entities.CompraDetalle", b =>
+            modelBuilder.Entity("Domain.Entities.CompraDetalle", b =>
                 {
-                    b.HasOne("Entities.Compra", "Compra")
+                    b.HasOne("Domain.Entities.Compra", "Compra")
                         .WithMany("CompraDetalles")
                         .HasForeignKey("CompraId");
 
-                    b.HasOne("Entities.Producto", "Producto")
+                    b.HasOne("Domain.Entities.Producto", "Producto")
                         .WithMany()
                         .HasForeignKey("ProductoId");
                 });
 
-            modelBuilder.Entity("Entities.Conductor", b =>
+            modelBuilder.Entity("Domain.Entities.Conductor", b =>
                 {
-                    b.HasOne("Entities.Persona", "Persona")
+                    b.HasOne("Domain.Entities.Persona", "Persona")
                         .WithMany()
                         .HasForeignKey("PersonaId");
                 });
 
-            modelBuilder.Entity("Entities.Deuda", b =>
+            modelBuilder.Entity("Domain.Entities.Deuda", b =>
                 {
-                    b.HasOne("Entities.Persona", "Persona")
+                    b.HasOne("Domain.Entities.Persona", "Persona")
                         .WithMany("Deudas")
                         .HasForeignKey("PersonaId");
                 });
 
-            modelBuilder.Entity("Entities.Devolucion", b =>
+            modelBuilder.Entity("Domain.Entities.Devolucion", b =>
                 {
-                    b.HasOne("Entities.Usuario", "Usuario")
+                    b.HasOne("Domain.Entities.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId");
 
-                    b.HasOne("Entities.Venta", "Venta")
+                    b.HasOne("Domain.Entities.Venta", "Venta")
                         .WithMany("Devoluciones")
                         .HasForeignKey("VentaId");
                 });
 
-            modelBuilder.Entity("Entities.DevolucionDetalle", b =>
+            modelBuilder.Entity("Domain.Entities.DevolucionDetalle", b =>
                 {
-                    b.HasOne("Entities.Devolucion", "Devolucion")
+                    b.HasOne("Domain.Entities.Devolucion", "Devolucion")
                         .WithMany("DevolucionDetalles")
                         .HasForeignKey("DevolucionId");
 
-                    b.HasOne("Entities.Producto", "Producto")
+                    b.HasOne("Domain.Entities.Producto", "Producto")
                         .WithMany()
                         .HasForeignKey("ProductoId");
                 });
 
-            modelBuilder.Entity("Entities.Distribucion", b =>
+            modelBuilder.Entity("Domain.Entities.Distribucion", b =>
                 {
-                    b.HasOne("Entities.Conductor", "Conductor")
+                    b.HasOne("Domain.Entities.Conductor", "Conductor")
                         .WithMany()
                         .HasForeignKey("ConductorId");
 
-                    b.HasOne("Entities.Ruta", "Ruta")
+                    b.HasOne("Domain.Entities.Ruta", "Ruta")
                         .WithMany("Distribuciones")
                         .HasForeignKey("RutaId");
 
-                    b.HasOne("Entities.Vehiculo", "Vehiculo")
+                    b.HasOne("Domain.Entities.Vehiculo", "Vehiculo")
                         .WithMany()
                         .HasForeignKey("VehiculoId");
                 });
 
-            modelBuilder.Entity("Entities.DistribucionDetalle", b =>
+            modelBuilder.Entity("Domain.Entities.DistribucionDetalle", b =>
                 {
-                    b.HasOne("Entities.Distribucion", "Distribucion")
+                    b.HasOne("Domain.Entities.Distribucion", "Distribucion")
                         .WithMany("DistribucionDetalles")
                         .HasForeignKey("DistribucionId");
 
-                    b.HasOne("Entities.Venta", "Venta")
+                    b.HasOne("Domain.Entities.Venta", "Venta")
                         .WithMany()
                         .HasForeignKey("VentaId");
                 });
 
-            modelBuilder.Entity("Entities.DistribucionVendedor", b =>
+            modelBuilder.Entity("Domain.Entities.DistribucionVendedor", b =>
                 {
-                    b.HasOne("Entities.Distribucion", "Distribucion")
+                    b.HasOne("Domain.Entities.Distribucion", "Distribucion")
                         .WithMany("Vendedores")
                         .HasForeignKey("DistribucionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Vendedor", "Vendedor")
+                    b.HasOne("Domain.Entities.Vendedor", "Vendedor")
                         .WithMany()
                         .HasForeignKey("VendedorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Entities.Persona", b =>
+            modelBuilder.Entity("Domain.Entities.Persona", b =>
                 {
-                    b.HasOne("ValueObjects.Direccion", "Direccion")
+                    b.HasOne("Domain.ValueObjects.Direccion", "Direccion")
                         .WithMany()
                         .HasForeignKey("DireccionId");
 
-                    b.HasOne("ValueObjects.Comprobante", "Documento")
+                    b.HasOne("Domain.ValueObjects.Comprobante", "Documento")
                         .WithMany()
                         .HasForeignKey("DocumentoId");
                 });
 
-            modelBuilder.Entity("Entities.Producto", b =>
+            modelBuilder.Entity("Domain.Entities.Producto", b =>
                 {
-                    b.HasOne("Entities.Subcategoria", "Subcategoria")
+                    b.HasOne("Domain.Entities.Subcategoria", "Subcategoria")
                         .WithMany("Productos")
                         .HasForeignKey("SubcategoriaId");
                 });
 
-            modelBuilder.Entity("Entities.ProductoBodega", b =>
+            modelBuilder.Entity("Domain.Entities.ProductoBodega", b =>
                 {
-                    b.HasOne("Entities.Bodega", "Bodega")
+                    b.HasOne("Domain.Entities.Bodega", "Bodega")
                         .WithMany("ProductoBodegas")
                         .HasForeignKey("BodegaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Producto", "Producto")
-                        .WithMany()
+                    b.HasOne("Domain.Entities.Producto", "Producto")
+                        .WithMany("ProductoBodegas")
                         .HasForeignKey("ProductoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Entities.Proveedor", b =>
+            modelBuilder.Entity("Domain.Entities.Proveedor", b =>
                 {
-                    b.HasOne("Entities.Persona", "Persona")
+                    b.HasOne("Domain.Entities.Persona", "Persona")
                         .WithMany()
                         .HasForeignKey("PersonaId");
                 });
 
-            modelBuilder.Entity("Entities.Subcategoria", b =>
+            modelBuilder.Entity("Domain.Entities.Subcategoria", b =>
                 {
-                    b.HasOne("Entities.Categoria", "Categoria")
+                    b.HasOne("Domain.Entities.Categoria", "Categoria")
                         .WithMany("Subcategorias")
                         .HasForeignKey("CategoriaId");
                 });
 
-            modelBuilder.Entity("Entities.Usuario", b =>
+            modelBuilder.Entity("Domain.Entities.Usuario", b =>
                 {
-                    b.HasOne("Entities.Persona", "Persona")
+                    b.HasOne("Domain.Entities.Persona", "Persona")
                         .WithMany()
                         .HasForeignKey("PersonaId");
 
-                    b.HasOne("Entities.Rol", "Rol")
+                    b.HasOne("Domain.Entities.Rol", "Rol")
                         .WithMany("Usuarios")
                         .HasForeignKey("RolId");
                 });
 
-            modelBuilder.Entity("Entities.Vehiculo", b =>
+            modelBuilder.Entity("Domain.Entities.Vehiculo", b =>
                 {
-                    b.HasOne("Entities.Bodega", "Bodega")
+                    b.HasOne("Domain.Entities.Bodega", "Bodega")
                         .WithMany()
                         .HasForeignKey("BodegaId");
 
-                    b.HasOne("ValueObjects.Comprobante", "Comprobante")
+                    b.HasOne("Domain.ValueObjects.Comprobante", "Comprobante")
                         .WithMany()
                         .HasForeignKey("ComprobanteId");
                 });
 
-            modelBuilder.Entity("Entities.Vendedor", b =>
+            modelBuilder.Entity("Domain.Entities.Vendedor", b =>
                 {
-                    b.HasOne("Entities.Persona", "Persona")
+                    b.HasOne("Domain.Entities.Persona", "Persona")
                         .WithMany()
                         .HasForeignKey("PersonaId");
                 });
 
-            modelBuilder.Entity("Entities.Venta", b =>
+            modelBuilder.Entity("Domain.Entities.Venta", b =>
                 {
-                    b.HasOne("ValueObjects.Comprobante", "Comprobante")
+                    b.HasOne("Domain.ValueObjects.Comprobante", "Comprobante")
                         .WithMany()
                         .HasForeignKey("ComprobanteId");
 
-                    b.HasOne("Entities.Usuario", "Usuario")
+                    b.HasOne("Domain.Entities.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId");
 
-                    b.HasOne("Entities.Vendedor", "Vendedor")
+                    b.HasOne("Domain.Entities.Vendedor", "Vendedor")
                         .WithMany("Ventas")
                         .HasForeignKey("VendedorId");
                 });
 
-            modelBuilder.Entity("Entities.VentaDetalle", b =>
+            modelBuilder.Entity("Domain.Entities.VentaDetalle", b =>
                 {
-                    b.HasOne("Entities.Venta", "Venta")
+                    b.HasOne("Domain.Entities.Venta", "Venta")
                         .WithMany("VentaDetalles")
                         .HasForeignKey("VentaId");
 
-                    b.HasOne("Entities.ProductoBodega", "ProductoBodega")
+                    b.HasOne("Domain.Entities.ProductoBodega", "ProductoBodega")
                         .WithMany()
                         .HasForeignKey("ProductoBodegaBodegaId", "ProductoBodegaProductoId");
                 });
