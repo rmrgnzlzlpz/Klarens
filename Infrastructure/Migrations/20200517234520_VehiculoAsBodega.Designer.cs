@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(KlarensContext))]
-    [Migration("20200511203036_Inicial")]
-    partial class Inicial
+    [Migration("20200517234520_VehiculoAsBodega")]
+    partial class VehiculoAsBodega
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -509,14 +509,9 @@ namespace Infrastructure.Migrations
                     b.Property<int?>("BodegaId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("ComprobanteId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.HasIndex("BodegaId");
-
-                    b.HasIndex("ComprobanteId");
 
                     b.ToTable("Vehiculos");
                 });
@@ -822,10 +817,6 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.Entities.Bodega", "Bodega")
                         .WithMany()
                         .HasForeignKey("BodegaId");
-
-                    b.HasOne("Domain.ValueObjects.Comprobante", "Comprobante")
-                        .WithMany()
-                        .HasForeignKey("ComprobanteId");
                 });
 
             modelBuilder.Entity("Domain.Entities.Vendedor", b =>

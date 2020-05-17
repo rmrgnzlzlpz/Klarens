@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Application.Base
 {
-    public interface IResponse<T> where T : class
+    public interface IResponse<T>
     {
-        string Message { get; set; }
-        T Entity { get; set; }
+        string Mensaje { get;}
+        IList<T> Entidades { get; }
     }
 }

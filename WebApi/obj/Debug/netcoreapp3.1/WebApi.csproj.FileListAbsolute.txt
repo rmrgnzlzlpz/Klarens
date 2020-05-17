@@ -39,8 +39,13 @@ D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\WebApi\bin\Debug\n
 D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\WebApi\bin\Debug\netcoreapp3.1\Application.pdb
 D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\WebApi\bin\Debug\netcoreapp3.1\Infrastructure.pdb
 D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\WebApi\bin\Debug\netcoreapp3.1\Domain.pdb
-D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\WebApi\obj\Debug\netcoreapp3.1\WebApi.csproj.CoreCompileInputs.cache
-D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\WebApi\obj\Debug\netcoreapp3.1\WebApi.MvcApplicationPartsAssemblyInfo.cache
 D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\WebApi\obj\Debug\netcoreapp3.1\WebApi.dll
 D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\WebApi\obj\Debug\netcoreapp3.1\WebApi.pdb
 D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\WebApi\obj\Debug\netcoreapp3.1\WebApi.genruntimeconfig.cache
+D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\WebApi\bin\Debug\netcoreapp3.1\Microsoft.OpenApi.dll
+D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\WebApi\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
+D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\WebApi\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\WebApi\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\WebApi\obj\Debug\netcoreapp3.1\WebApi.csproj.CoreCompileInputs.cache
+D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\WebApi\obj\Debug\netcoreapp3.1\WebApi.MvcApplicationPartsAssemblyInfo.cs
+D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\WebApi\obj\Debug\netcoreapp3.1\WebApi.MvcApplicationPartsAssemblyInfo.cache

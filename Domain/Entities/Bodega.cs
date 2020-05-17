@@ -1,26 +1,67 @@
 using System.Collections.Generic;
 using System.Linq;
 using Domain.Base;
+using Domain.Interfaces;
 
 namespace Domain.Entities
 {
-    public class Bodega : Entity<int>
+    public class Bodega : Entity<int>, IBodega
     {
         private static List<string> _errores;
-        public List<ProductoBodega> ProductoBodegas { get; private set; }
+        public IList<ProductoBodega> ProductoBodegas { get; private set; }
         public string Codigo { get; set; }
         public string Descripcion { get; set; }
         public BodegaTipo Tipo { get; set; }
         public BodegaEstado Estado { get; set; }
-        
-        public void AgregarProducto(Producto producto, int cantidad)
+
+        public bool ExisteProducto(Producto producto)
+        {
+            return ProductoBodegas.FirstOrDefault(x => x.Producto == producto) != null;
+        }
+
+        public ProductoBodega AgregarProducto(Producto producto, int cantidad)
         {
             if (PuedeAgregarProducto(producto, cantidad).Any()) throw new System.Exception(string.Join(",", _errores));
 
-            ProductoBodegas.Add(new ProductoBodega {
-                Producto = producto,
-                Cantidad = cantidad
-            });
+            if (!ExisteProducto(producto))
+            {
+                ProductoBodegas.Add(new ProductoBodega
+                {
+                    Producto = producto,
+                    Cantidad = cantidad
+                });
+            }
+            else
+            {
+                ProductoBodegas.FirstOrDefault(x => x.Producto == producto).Cantidad += cantidad;
+            }
+            return ProductoBodegas.FirstOrDefault(x => x.Producto == producto);
+        }
+
+        public ProductoBodega SacarProducto(Producto producto, int cantidad)
+        {
+            if (!ExisteProducto(producto)) return null;
+
+            ProductoBodega productoBodega = ProductoBodegas.FirstOrDefault(x => x.Producto == producto);
+            if (productoBodega.Cantidad >= cantidad)
+            {
+                productoBodega.Cantidad -= cantidad;
+                return new ProductoBodega {
+                    Producto = producto,
+                    Cantidad = cantidad
+                };
+            }
+            return null;
+        }
+
+        public ProductoBodega TrasladarProducto(IBodega bodega, Producto producto, int cantidad)
+        {
+            var productoBodegaExtraido = SacarProducto(producto, cantidad);
+            if (productoBodegaExtraido != null)
+            {
+                return bodega.AgregarProducto(producto, cantidad);
+            }
+            return null;
         }
 
         public static List<string> PuedeAgregarProducto(Producto producto, int cantidad)

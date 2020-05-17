@@ -507,14 +507,9 @@ namespace Infrastructure.Migrations
                     b.Property<int?>("BodegaId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("ComprobanteId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
                     b.HasIndex("BodegaId");
-
-                    b.HasIndex("ComprobanteId");
 
                     b.ToTable("Vehiculos");
                 });
@@ -820,10 +815,6 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.Entities.Bodega", "Bodega")
                         .WithMany()
                         .HasForeignKey("BodegaId");
-
-                    b.HasOne("Domain.ValueObjects.Comprobante", "Comprobante")
-                        .WithMany()
-                        .HasForeignKey("ComprobanteId");
                 });
 
             modelBuilder.Entity("Domain.Entities.Vendedor", b =>
