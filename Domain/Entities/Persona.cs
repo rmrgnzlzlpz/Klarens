@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using Domain.Base;
 using Domain.ValueObjects;
 
@@ -22,5 +23,20 @@ namespace Domain.Entities
             }
             return total;
         }}
+
+        /*
+        public Pago Abonar(double valor)
+        {
+            if (valor > 0 && valor < Deuda)
+            {
+                if (Deudas == null) return null;
+                foreach (var item in Deudas.Where(x => x.Estado != DeudaEstado.Pagada))
+                {
+                    
+                }
+                Pago pago = new Pago { Valor = valor, Estado = PagoEstado.Activo };
+            }
+        }
+        */
     }
 }

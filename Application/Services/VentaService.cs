@@ -26,7 +26,7 @@ namespace Application.Services
             }
 
             List<VentaDetalle> Detalles = new List<VentaDetalle>();
-            foreach (var item in request.VentaDetalles)
+            foreach (var item in request.Detalles)
             {
                 if (_productoService.Disponible(item.CodigoProducto, item.CodigoBodega, item.Cantidad) == false)
                 {

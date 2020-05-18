@@ -45,7 +45,7 @@ namespace Domain.Entities
             ProductoBodega productoBodega = ProductoBodegas.FirstOrDefault(x => x.Producto == producto);
             if (productoBodega.Cantidad >= cantidad)
             {
-                productoBodega.Cantidad -= cantidad;
+                productoBodega.Cantidad -= cantidad; //Private
                 return new ProductoBodega {
                     Producto = producto,
                     Cantidad = cantidad

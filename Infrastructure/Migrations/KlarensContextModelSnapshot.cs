@@ -161,9 +161,6 @@ namespace Infrastructure.Migrations
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<double>("Pagado")
-                        .HasColumnType("double precision");
-
                     b.Property<int?>("PersonaId")
                         .HasColumnType("integer");
 
@@ -298,6 +295,32 @@ namespace Infrastructure.Migrations
                     b.HasIndex("DistribucionId");
 
                     b.ToTable("DistribucionVendedores");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Pago", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int?>("DeudaId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Estado")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<double>("Valor")
+                        .HasColumnType("double precision");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeudaId");
+
+                    b.ToTable("Pago");
                 });
 
             modelBuilder.Entity("Domain.Entities.Persona", b =>
@@ -750,6 +773,13 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("VendedorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Domain.Entities.Pago", b =>
+                {
+                    b.HasOne("Domain.Entities.Deuda", "Deuda")
+                        .WithMany("Pagos")
+                        .HasForeignKey("DeudaId");
                 });
 
             modelBuilder.Entity("Domain.Entities.Persona", b =>

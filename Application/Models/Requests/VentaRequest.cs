@@ -10,7 +10,7 @@ namespace Application.Models
     public class VentaRequest : IRequest<Venta>
     {
         public string DocumentoVendedor { get; set; }
-        public List<VentaDetalleRequest> VentaDetalles { get; set; }
+        public List<VentaDetalleRequest> Detalles { get; set; }
         public string NumeroComprobante { get; set; }
         public ComprobanteTipo TipoComprobante { get; set; }
         public double Pagado { get; set; }

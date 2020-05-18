@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Infrastructure.Migrations
 {
-    public partial class VehiculoAsBodega : Migration
+    public partial class Inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -219,7 +219,6 @@ namespace Infrastructure.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     PersonaId = table.Column<int>(nullable: true),
                     Valor = table.Column<double>(nullable: false),
-                    Pagado = table.Column<double>(nullable: false),
                     Fecha = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -356,6 +355,28 @@ namespace Infrastructure.Migrations
                         name: "FK_Distribuciones_Vehiculos_VehiculoId",
                         column: x => x.VehiculoId,
                         principalTable: "Vehiculos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Pago",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    DeudaId = table.Column<int>(nullable: true),
+                    Fecha = table.Column<DateTime>(nullable: false),
+                    Valor = table.Column<double>(nullable: false),
+                    Estado = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Pago", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Pago_Deudas_DeudaId",
+                        column: x => x.DeudaId,
+                        principalTable: "Deudas",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -685,6 +706,11 @@ namespace Infrastructure.Migrations
                 column: "DistribucionId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Pago_DeudaId",
+                table: "Pago",
+                column: "DeudaId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Personas_DireccionId",
                 table: "Personas",
                 column: "DireccionId");
@@ -772,9 +798,6 @@ namespace Infrastructure.Migrations
                 name: "CompraDetalles");
 
             migrationBuilder.DropTable(
-                name: "Deudas");
-
-            migrationBuilder.DropTable(
                 name: "DevolucionDetalles");
 
             migrationBuilder.DropTable(
@@ -782,6 +805,9 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "DistribucionVendedores");
+
+            migrationBuilder.DropTable(
+                name: "Pago");
 
             migrationBuilder.DropTable(
                 name: "VentaDetalles");
@@ -794,6 +820,9 @@ namespace Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Distribuciones");
+
+            migrationBuilder.DropTable(
+                name: "Deudas");
 
             migrationBuilder.DropTable(
                 name: "ProductosBodegas");
