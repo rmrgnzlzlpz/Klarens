@@ -13,7 +13,7 @@ namespace Application.Services
 
         public IResponse<Producto> Add(ProductoRequest request)
         {
-            Producto producto = _unitOfWork.ProductoRepository.FindFirstOrDefault(x => x.Codigo == request.Codigo && x.Estado == ProductoEstado.Activo);
+            Producto producto = _repository.FindFirstOrDefault(x => x.Codigo == request.Codigo);
             if (producto != null)
             {
                 return new Response<Producto>(
@@ -22,6 +22,19 @@ namespace Application.Services
                 );
             }
             return base.Add(request.ToEntity());
+        }
+
+        public bool Disponible(string codigoProducto, string codigoBodega, int cantidad)
+        {
+            var producto = ProductoEnBodega(codigoProducto, codigoBodega);
+            if (producto == null) return false;
+            if (producto.Cantidad < cantidad) return false;
+            return true;
+        }
+
+        public ProductoBodega ProductoEnBodega(string codigoProducto, string codigoBodega)
+        {
+            return _unitOfWork.ProductoBodegaRepository.FindFirstOrDefault(x => x.Bodega.Codigo == codigoBodega && x.Producto.Codigo == codigoProducto);
         }
     }
 }

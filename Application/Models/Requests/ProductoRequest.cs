@@ -16,7 +16,7 @@ namespace Application.Models
         public ProductoEstado Estado { get; set; }
         public Producto ToEntity()
         {
-            var producto = new Producto
+            return new Producto
             {
                 Codigo = this.Codigo,
                 Nombre = this.Nombre, 
@@ -24,7 +24,6 @@ namespace Application.Models
                 Descripcion = this.Descripcion, 
                 Estado = this.Estado
             };
-            return producto;
         }
     }
 }

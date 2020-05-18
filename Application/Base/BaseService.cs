@@ -44,5 +44,10 @@ namespace Application.Base
                 entidad: _repository.FindBy(expression, includeProperties: include).Skip((int)(page * size)).Take((int)size).ToList()
             );
         }
+
+        public virtual T Find(int id)
+        {
+            return _repository.Find(id);
+        }
     }
 }

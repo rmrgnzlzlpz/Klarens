@@ -11,7 +11,7 @@ namespace Domain.Entities
         [Required] public List<VentaDetalle> VentaDetalles { get; set; }
         public Vendedor Vendedor { get; set; }
         public Comprobante Comprobante { get; set; }
-        public double Pagado { get; private set; }
+        public double Pagado { get; set; }
         public double Total { get {
             double total = 0;
             foreach(var detalle in VentaDetalles)
@@ -26,10 +26,15 @@ namespace Domain.Entities
         public double Impuesto { get; set; }
         public Usuario Usuario { get; set; }
         public List<Devolucion> Devoluciones { get; set; }
+
+        public Venta()
+        {
+            Fecha = DateTime.UtcNow;
+        }
     }
 
     public enum VentaEstado
     {
-
+        Activa = 0, Cancelada = 1
     }
 }

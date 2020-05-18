@@ -16,7 +16,8 @@ namespace Application.Models
         {
             return new Usuario
             {
-                Username = Username, Password = Password
+                Username = Username, 
+                Password = Password
             };
         }
     }

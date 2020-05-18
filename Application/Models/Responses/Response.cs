@@ -21,5 +21,10 @@ namespace Application.Models
             Mensaje = mensaje;
             Entidades = new List<T> { entidad };
         }
+
+        public Response(string mensaje)
+        {
+            Mensaje = mensaje;
+        }
     }
 }

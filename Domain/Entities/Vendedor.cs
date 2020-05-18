@@ -9,14 +9,18 @@ namespace Domain.Entities
     {
         public Persona Persona { get; set; }
         public List<Venta> Ventas { get; set; }
-        public double VendidoMes { get {
-            if (Ventas == null) return 0;
-            double total = 0;
-            foreach (var venta in Ventas.Where(x => x.Fecha.Month == DateTime.UtcNow.Month))
+        public double VendidoMes
+        {
+            get
             {
-                total += venta.Total;
+                if (Ventas == null) return 0;
+                double total = 0;
+                foreach (var venta in Ventas.Where(x => x.Fecha.Month == DateTime.UtcNow.Month))
+                {
+                    total += venta.Total;
+                }
+                return total;
             }
-            return total;
-        }}
+        }
     }
 }
