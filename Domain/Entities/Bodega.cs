@@ -15,8 +15,14 @@ namespace Domain.Entities
         public BodegaTipo Tipo { get; set; }
         public BodegaEstado Estado { get; set; }
 
+        public Bodega()
+        {
+            ProductoBodegas = new List<ProductoBodega>();
+        }
+
         public bool ExisteProducto(Producto producto)
         {
+            if (ProductoBodegas == null) return false;
             return ProductoBodegas.FirstOrDefault(x => x.Producto == producto) != null;
         }
 

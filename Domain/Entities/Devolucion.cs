@@ -13,6 +13,14 @@ namespace Domain.Entities
         public double Total { get; set; }
         public DevolucionEstado Estado { get; set; }
         public string Descripcion { get; set; }
+
+        public Devolucion(Venta venta, List<DevolucionDetalle> detalles)
+        {
+            Venta = venta;
+            DevolucionDetalles = detalles;
+        }
+
+        public Devolucion() { }
     }
 
     public enum DevolucionEstado

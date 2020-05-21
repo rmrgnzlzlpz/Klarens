@@ -34,6 +34,12 @@ namespace Domain.Entities
             VentaDetalles = detalles;
             Fecha = DateTime.UtcNow;
         }
+
+        public bool Cancelar()
+        {
+            Estado = VentaEstado.Cancelada;
+            return Estado == VentaEstado.Cancelada;
+        }
     }
 
     public enum VentaEstado

@@ -21,13 +21,20 @@ namespace Domain.Builders
 
         public VentaBuilder AgregarDetalle(ProductoBodega producto, int cantidad, double precio, double descuento)
         {
-            Detalles.Add(new VentaDetalle
+            VentaDetalle detalleExistente = Detalles.FirstOrDefault(x => x.ProductoBodega == producto);
+            if (detalleExistente != null)
             {
-                ProductoBodega = producto,
-                Cantidad = cantidad,
-                Precio = precio,
-                Descuento = descuento
-            });
+                detalleExistente.Aumentar(cantidad, precio, descuento);
+            } else
+            {
+                Detalles.Add(new VentaDetalle
+                {
+                    ProductoBodega = producto,
+                    Cantidad = cantidad,
+                    Precio = precio,
+                    Descuento = descuento
+                });
+            }
             return this;
         }
 
