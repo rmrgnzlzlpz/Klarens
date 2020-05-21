@@ -28,7 +28,15 @@ namespace Domain.Entities
         }}
         public Proveedor Proveedor { get; set; }
         public Usuario Usuario { get; set; }
-        public bool Cancelada { get; set; }
+        public bool Cancelada { get; set; } = false;
+
+        public Compra(List<CompraDetalle> detalles)
+        {
+            CompraDetalles = detalles;
+            Fecha = DateTime.UtcNow;
+        }
+
+        public Compra() { }
     }
 
     public enum CompraEstado

@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Infrastructure.Migrations
 {
-    public partial class Inicial : Migration
+    public partial class Pagos : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -98,25 +98,6 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Vehiculos",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    BodegaId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Vehiculos", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Vehiculos_Bodegas_BodegaId",
-                        column: x => x.BodegaId,
-                        principalTable: "Bodegas",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Subcategorias",
                 columns: table => new
                 {
@@ -134,6 +115,35 @@ namespace Infrastructure.Migrations
                         name: "FK_Subcategorias_Categorias_CategoriaId",
                         column: x => x.CategoriaId,
                         principalTable: "Categorias",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Vehiculos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    BodegaId = table.Column<int>(nullable: true),
+                    ComprobanteId = table.Column<int>(nullable: true),
+                    Marca = table.Column<string>(nullable: true),
+                    Modelo = table.Column<string>(nullable: true),
+                    Color = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Vehiculos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Vehiculos_Bodegas_BodegaId",
+                        column: x => x.BodegaId,
+                        principalTable: "Bodegas",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Vehiculos_Comprobante_ComprobanteId",
+                        column: x => x.ComprobanteId,
+                        principalTable: "Comprobante",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -360,7 +370,7 @@ namespace Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Pago",
+                name: "Pagos",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -372,9 +382,9 @@ namespace Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Pago", x => x.Id);
+                    table.PrimaryKey("PK_Pagos", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Pago_Deudas_DeudaId",
+                        name: "FK_Pagos_Deudas_DeudaId",
                         column: x => x.DeudaId,
                         principalTable: "Deudas",
                         principalColumn: "Id",
@@ -646,6 +656,12 @@ namespace Infrastructure.Migrations
                 column: "UsuarioId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Comprobante_Numero_Tipo",
+                table: "Comprobante",
+                columns: new[] { "Numero", "Tipo" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Conductores_PersonaId",
                 table: "Conductores",
                 column: "PersonaId");
@@ -706,8 +722,8 @@ namespace Infrastructure.Migrations
                 column: "DistribucionId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Pago_DeudaId",
-                table: "Pago",
+                name: "IX_Pagos_DeudaId",
+                table: "Pagos",
                 column: "DeudaId");
 
             migrationBuilder.CreateIndex(
@@ -762,6 +778,11 @@ namespace Infrastructure.Migrations
                 column: "BodegaId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Vehiculos_ComprobanteId",
+                table: "Vehiculos",
+                column: "ComprobanteId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Vendedores_PersonaId",
                 table: "Vendedores",
                 column: "PersonaId");
@@ -807,7 +828,7 @@ namespace Infrastructure.Migrations
                 name: "DistribucionVendedores");
 
             migrationBuilder.DropTable(
-                name: "Pago");
+                name: "Pagos");
 
             migrationBuilder.DropTable(
                 name: "VentaDetalles");

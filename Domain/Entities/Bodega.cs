@@ -2,15 +2,16 @@ using System.Collections.Generic;
 using System.Linq;
 using Domain.Base;
 using Domain.Interfaces;
+using Domain.ValueObjects;
 
 namespace Domain.Entities
 {
     public class Bodega : Entity<int>, IBodega
     {
-        private static List<string> _errores;
         public IList<ProductoBodega> ProductoBodegas { get; private set; }
         public string Codigo { get; set; }
         public string Descripcion { get; set; }
+        public Direccion Direccion { get; set; }
         public BodegaTipo Tipo { get; set; }
         public BodegaEstado Estado { get; set; }
 
@@ -21,7 +22,8 @@ namespace Domain.Entities
 
         public ProductoBodega AgregarProducto(Producto producto, int cantidad)
         {
-            if (PuedeAgregarProducto(producto, cantidad).Any()) throw new System.Exception(string.Join(",", _errores));
+            var errores = PuedeAgregarProducto(producto, cantidad);
+            if (errores.Any()) throw new System.InvalidOperationException(string.Join(",", errores));
 
             if (!ExisteProducto(producto))
             {
@@ -43,9 +45,8 @@ namespace Domain.Entities
             if (!ExisteProducto(producto)) return null;
 
             ProductoBodega productoBodega = ProductoBodegas.FirstOrDefault(x => x.Producto == producto);
-            if (productoBodega.Cantidad >= cantidad)
+            if (productoBodega.RestarCantidad(cantidad) > 0)
             {
-                productoBodega.Cantidad -= cantidad; //Private
                 return new ProductoBodega {
                     Producto = producto,
                     Cantidad = cantidad
@@ -64,12 +65,12 @@ namespace Domain.Entities
             return null;
         }
 
-        public static List<string> PuedeAgregarProducto(Producto producto, int cantidad)
+        public List<string> PuedeAgregarProducto(Producto producto, int cantidad)
         {
-            _errores = new List<string>();
-            if (cantidad < 1) _errores.Add("La cantidad del producto debe ser mayor a 0.");
-            if (producto == null) _errores.Add("Producto no válido.");
-            return _errores;
+            List<string> errores = new List<string>();
+            if (cantidad < 1) errores.Add("La cantidad del producto debe ser mayor a 0.");
+            if (producto == null) errores.Add("Producto no válido.");
+            return errores;
         }
     }
 

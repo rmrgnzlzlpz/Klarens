@@ -9,6 +9,10 @@ namespace Domain.Entities
     public class Vehiculo : Entity<int>, IBodega
     {
         public Bodega Bodega { get; set; }
+        public Comprobante Comprobante { get; set; }
+        public string Marca { get; set; }
+        public string Modelo { get; set; }
+        public string Color { get; set; }
 
         public ProductoBodega AgregarProducto(Producto producto, int cantidad)
         {

@@ -320,7 +320,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("DeudaId");
 
-                    b.ToTable("Pago");
+                    b.ToTable("Pagos");
                 });
 
             modelBuilder.Entity("Domain.Entities.Persona", b =>
@@ -530,9 +530,23 @@ namespace Infrastructure.Migrations
                     b.Property<int?>("BodegaId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Color")
+                        .HasColumnType("text");
+
+                    b.Property<int?>("ComprobanteId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Marca")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Modelo")
+                        .HasColumnType("text");
+
                     b.HasKey("Id");
 
                     b.HasIndex("BodegaId");
+
+                    b.HasIndex("ComprobanteId");
 
                     b.ToTable("Vehiculos");
                 });
@@ -641,6 +655,9 @@ namespace Infrastructure.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Numero", "Tipo")
+                        .IsUnique();
 
                     b.ToTable("Comprobante");
                 });
@@ -845,6 +862,10 @@ namespace Infrastructure.Migrations
                     b.HasOne("Domain.Entities.Bodega", "Bodega")
                         .WithMany()
                         .HasForeignKey("BodegaId");
+
+                    b.HasOne("Domain.ValueObjects.Comprobante", "Comprobante")
+                        .WithMany()
+                        .HasForeignKey("ComprobanteId");
                 });
 
             modelBuilder.Entity("Domain.Entities.Vendedor", b =>

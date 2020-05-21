@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.ValueObjects;
 using Infrastructure.Base;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -20,6 +21,7 @@ namespace Infrastructure
         public DbSet<Distribucion> Distribuciones { get; set; }
         public DbSet<DistribucionDetalle> DistribucionDetalles { get; set; }
         public DbSet<DistribucionVendedor> DistribucionVendedores { get; set; }
+        public DbSet<Pago> Pagos { get; set; }
         public DbSet<Persona> Personas { get; set; }
         public DbSet<Producto> Productos { get; set; }
         public DbSet<ProductoBodega> ProductosBodegas { get; set; }
@@ -40,6 +42,7 @@ namespace Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Usuario>().HasIndex(x => x.Username).IsUnique();
+            modelBuilder.Entity<Comprobante>().HasIndex(x => new { x.Numero, x.Tipo }).IsUnique();
             modelBuilder.Entity<ProductoBodega>().HasKey(x => new { x.BodegaId, x.ProductoId });
             modelBuilder.Entity<DistribucionVendedor>().HasKey(x => new { x.VendedorId, x.DistribucionId });
         }

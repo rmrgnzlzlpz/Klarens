@@ -9,5 +9,12 @@ namespace Domain.Entities
         public int BodegaId { get; set; }
         public Bodega Bodega { get; set; }
         public int Cantidad { get; set; }
+
+        public int RestarCantidad(int cantidadRestada)
+        {
+            if (cantidadRestada > Cantidad) return 0;
+            Cantidad -= cantidadRestada;
+            return cantidadRestada;
+        }
     }
 }

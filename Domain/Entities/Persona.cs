@@ -13,6 +13,7 @@ namespace Domain.Entities
         public Direccion Direccion { get; set; }
         [Phone] public string Telefono { get; set; }
         [EmailAddress] public string Email { get; set; }
+        public List<Usuario> Usuarios { get; set; }
         public List<Deuda> Deudas { get; set; }
         public double Deuda { get {
             if (Deudas == null) return 0;
