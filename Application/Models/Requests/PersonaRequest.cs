@@ -14,7 +14,7 @@ namespace Application.Models
         public ComprobanteTipo TipoDocumento { get; set; }
         public DireccionRequest Direccion { get; set; }
         public string Telefono { get; set; }
-        public stringa Email { get; set; }
+        public string Email { get; set; }
         public Persona ToEntity()
         {
             return new Persona
@@ -24,6 +24,5 @@ namespace Application.Models
                 Direccion = this.Direccion.ToEntity()
             };
         }
-        
     }
 }
