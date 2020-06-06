@@ -24,9 +24,9 @@ namespace Application.Services
             }
 
             vendedor = new Vendedor
-            {
-                Persona = _unitOfWork.PersonaRepository.FindFirstOrDefault(x => x.Documento.Numero == request.NumeroDocumento)
-            };
+            (
+                _unitOfWork.PersonaRepository.FindFirstOrDefault(x => x.Documento.Numero == request.NumeroDocumento), null
+            );
 
             return new Response<Vendedor>
             (

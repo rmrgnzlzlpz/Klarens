@@ -12,7 +12,7 @@ namespace Application.Models
         public string NumeroDocumento { get; set; }
         public Vendedor ToEntity()
         {
-            return new Vendedor();
+            return new Vendedor(null, null);
         }
     }
 
@@ -22,9 +22,10 @@ namespace Application.Models
         public Vendedor ToEntity()
         {
             return new Vendedor
-            {
-                Persona = this.Persona.ToEntity()
-            };
+            (
+                this.Persona.ToEntity(),
+                null
+            );
         }
     }
 }

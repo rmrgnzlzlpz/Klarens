@@ -1,6 +1,5 @@
 using Domain.Builders;
 using Domain.Entities;
-using Domain.Interfaces;
 using Domain.ValueObjects;
 using NUnit.Framework;
 using System;
@@ -19,6 +18,7 @@ namespace Domain.Test
         {
             VentaBuilder ventaBuilder = new VentaBuilder();
             var bodega = new Bodega { Codigo = "001", Descripcion = "Principal", Tipo = BodegaTipo.Principal };
+
             leche = new Producto { Codigo = "LAC-001", Descripcion = "Leche de 1L", Nombre = "Leche Klarens 900ml", Precio = 2100, Estado = ProductoEstado.Activo };
             yogurt = new Producto { Codigo = "LAC-027", Descripcion = "Yogurt sencillo", Nombre = "Yogurt Klarens", Precio = 1200, Estado = ProductoEstado.Activo };
 

@@ -41,7 +41,6 @@ namespace Domain.Test
             ventaBuilder.AgregarComprobante(new Comprobante { Numero = "12345", Tipo = ComprobanteTipo.Factura });
             venta = ventaBuilder.Build(100000, 10000);
 
-            Assert.NotNull(ventaBuilder.Errores);
             Assert.NotNull(venta.VentaDetalles);
             Assert.AreEqual(6, venta.VentaDetalles.Count);
         }
@@ -65,5 +64,7 @@ namespace Domain.Test
 
             Assert.IsTrue(ex.Message.Contains("El comprobante no debe estar vacío"));
         }
+
+        // Validar suma de detalles == total
     }
 }

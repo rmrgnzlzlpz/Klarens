@@ -14,5 +14,7 @@ namespace Domain.Entities
             Persona = persona;
             Usuario = usuario;
         }
+
+        public Proveedor() {}
     }
 }

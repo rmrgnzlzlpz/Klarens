@@ -1,5 +1,4 @@
 using Domain.Entities;
-using Domain.Interfaces;
 using NUnit.Framework;
 
 namespace Domain.Test

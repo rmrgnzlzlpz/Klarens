@@ -7,6 +7,7 @@ namespace Domain.Entities
         public Persona Persona { get; private set; }
         public ConductorEstado Estado { get; set; }
 
+        public Conductor() {}
         public Conductor(Persona persona)
         {
             Persona = persona;

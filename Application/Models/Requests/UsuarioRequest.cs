@@ -15,10 +15,11 @@ namespace Application.Models
         public Usuario ToEntity()
         {
             return new Usuario
-            {
-                Username = Username, 
-                Password = Password
-            };
+            (
+                rol: new Rol { Id = RolId },
+                username: Username,
+                password: Password
+            );
         }
     }
 }

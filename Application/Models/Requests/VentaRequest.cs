@@ -19,7 +19,7 @@ namespace Application.Models
         public int UsuarioId { get; set; }
         public Venta ToEntity()
         {
-            return new Venta
+            return new Venta(null)
             {
                 Comprobante = new Comprobante { Numero = NumeroComprobante, Tipo = TipoComprobante },
                 Pagado = this.Pagado,

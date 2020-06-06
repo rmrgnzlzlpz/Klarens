@@ -22,9 +22,8 @@ namespace Application.Models
         public ConductorEstado Estado { get; set; }
         public Conductor ToEntity()
         {
-            return new Conductor
+            return new Conductor(this.Persona.ToEntity())
             {
-                Persona = this.Persona.ToEntity(),
                 Estado = this.Estado
             };
         }
