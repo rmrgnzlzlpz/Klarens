@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
+# Blend for Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{119A7774-8142-4177-8137-84409122B8BF}"
@@ -9,15 +9,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{C70B754E-E704-48C0-8FD0-9A25F75F1606}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "WebApi\WebApi.csproj", "{093A3A17-FEB5-4F09-9E1F-2C88ACE71084}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Test", "Infrastructure.Test\Infrastructure.Test.csproj", "{B955422D-43B7-45BC-A3AE-974362A4721A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Test", "Domain.Test\Domain.Test.csproj", "{5D8AFFCD-E3BF-4BE6-B742-8016A685756D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Test", "Application.Test\Application.Test.csproj", "{595DF4EC-5553-45AC-B92A-8C31ADCFD7B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{6E3BA3E5-2460-486A-899C-BCBB63DDDA55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{6E3BA3E5-2460-486A-899C-BCBB63DDDA55}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C0BB54BB-D150-45D7-8B22-9F1AEDC9E391}"
 	ProjectSection(SolutionItems) = preProject
@@ -42,10 +40,6 @@ Global
 		{C70B754E-E704-48C0-8FD0-9A25F75F1606}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C70B754E-E704-48C0-8FD0-9A25F75F1606}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C70B754E-E704-48C0-8FD0-9A25F75F1606}.Release|Any CPU.Build.0 = Release|Any CPU
-		{093A3A17-FEB5-4F09-9E1F-2C88ACE71084}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{093A3A17-FEB5-4F09-9E1F-2C88ACE71084}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{093A3A17-FEB5-4F09-9E1F-2C88ACE71084}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{093A3A17-FEB5-4F09-9E1F-2C88ACE71084}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B955422D-43B7-45BC-A3AE-974362A4721A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B955422D-43B7-45BC-A3AE-974362A4721A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B955422D-43B7-45BC-A3AE-974362A4721A}.Release|Any CPU.ActiveCfg = Release|Any CPU
