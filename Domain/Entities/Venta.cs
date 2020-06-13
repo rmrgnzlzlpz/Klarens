@@ -27,10 +27,12 @@ namespace Domain.Entities
         public Usuario Usuario { get; set; }
         public List<Devolucion> Devoluciones { get; set; }
 
+        public Venta() {}
+
         public Venta(List<VentaDetalle> detalles)
         {
-            if (detalles == null) throw new ArgumentException("Los detalles no pueden estar vacíos");
-            if (detalles.Count < 1) throw new ArgumentException("Los detalles no pueden estar vacíos");
+            if (detalles == null) throw new ArgumentException("Los detalles no pueden estar vacï¿½os");
+            if (detalles.Count < 1) throw new ArgumentException("Los detalles no pueden estar vacï¿½os");
             VentaDetalles = detalles;
             Fecha = DateTime.UtcNow;
         }

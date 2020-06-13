@@ -10,6 +10,8 @@ namespace Domain.Entities
         public string Password { get; set; }
         public UsuarioEstado Estado { get; set; }
 
+        public Usuario() {}
+        
         public Usuario(Rol rol, string username, string password)
         {
             Rol = rol;

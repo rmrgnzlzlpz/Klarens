@@ -19,17 +19,24 @@ namespace WebApi.Controllers
             _service = new UsuarioService(_unitOfWork);
         }
 
-        [HttpGet]
+        [HttpGet("{pagina}/{cantidad}")]
         public ActionResult<IResponse<Usuario>> GetAll(uint pagina = 0, uint cantidad = 10)
         {
             return Ok(_service.Get(page: pagina, size: cantidad));
         }
 
-        [HttpGet("id")]
-        public ActionResult<IResponse<Usuario>> Get(int id)
+        [HttpGet]
+        public ActionResult<IResponse<Usuario>> Get(string username)
         {
-            var response = _service.Get(x => x.Id == id);
+            var response = _service.Get(x => x.Username == username);
             return Ok(response);
+        }
+
+        [HttpGet("search")]
+        public ActionResult<IResponse<Usuario>> Search(UsuarioRequest request)
+        {
+            var response = _service.Get(x => x.Estado == UsuarioEstado.Activo);
+            return Ok(Response);
         }
 
         [HttpPost]

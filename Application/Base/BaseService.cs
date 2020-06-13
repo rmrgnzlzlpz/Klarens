@@ -21,9 +21,9 @@ namespace Application.Base
         public virtual IResponse<T> Add(T entity)
         {
             _repository.Add(entity);
-            _unitOfWork.Commit();
+            int result = _unitOfWork.Commit();
             return new Response<T>(
-                mensaje: "Registro guardado correctamente.",
+                mensaje: $"Registro guardado correctamente.{result}",
                 entidad: entity
             );
         }

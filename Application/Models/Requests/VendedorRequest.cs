@@ -12,7 +12,7 @@ namespace Application.Models
         public string NumeroDocumento { get; set; }
         public Vendedor ToEntity()
         {
-            return new Vendedor(null, null);
+            return new Vendedor();
         }
     }
 

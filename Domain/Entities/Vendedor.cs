@@ -31,6 +31,8 @@ namespace Domain.Entities
             return total;
         }
         
+        public Vendedor() {}
+
         public Vendedor(Persona persona, Usuario usuario)
         {
             Persona = persona;

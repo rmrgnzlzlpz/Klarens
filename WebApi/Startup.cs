@@ -33,27 +33,10 @@ namespace Api
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            #region Heroku
-            string _connectionString = Environment.GetEnvironmentVariable("DATABSE_URL");
-            _connectionString.Replace("//", "");
-            char[] delimiterChars = { '/', ':', '@', '?' };
+            services.AddControllersWithViews().AddJsonOptions(opt => opt.JsonSerializerOptions.IgnoreNullValues = true);
 
-            string[] strConn = _connectionString.Split(delimiterChars);
-            strConn = strConn.Where(x => !string.IsNullOrEmpty(x)).ToArray();
-
-            string user = strConn[1];
-            string pass = strConn[2];
-            string server = strConn[3];
-            string database = strConn[5];
-            string port = strConn[4];
-            string connectionString = "host=" + server + ";port=" + port + ";database=" + database + ";uid=" + user + ";pwd=" + pass + ";sslmode=Require;Trust Server Certificate=true;Timeout=1000";
-
-            #endregion
-
-            services.AddControllersWithViews().AddJsonOptions(opt => opt.JsonSerializerOptions.IgnoreNullValues = false);
-
-            // services.AddDbContext<KlarensContext>(opt => opt.UseNpgsql("Host=localhost;Database=klarens;Username=postgres;Password=Ramiroe123"));
-            services.AddDbContext<KlarensContext>(opt => opt.UseNpgsql(connectionString));
+            services.AddDbContext<KlarensContext>(opt => opt.UseNpgsql("Host=localhost;Database=klarens;Username=postgres;Password=Ramiroe123"));
+            
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IDbContext, KlarensContext>();
 
