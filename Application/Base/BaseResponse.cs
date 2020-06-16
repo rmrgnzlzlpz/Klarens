@@ -1,19 +1,20 @@
-﻿using Application.Base;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Application.Models
+namespace Application.Base
 {
-    public class Response<T> : IResponse<T> where T : class
+    public abstract class BaseResponse
+    {
+    }
+
+    public abstract class Response<T> : BaseResponse, IResponse<T> where T : class
     {
         public string Mensaje { get; private set; }
-        public IList<T> Entidades { get; private set; }
+        public List<T> Entidades { get; private set; }
 
-        public Response(string mensaje, IList<T> entidad)
+        public Response(string mensaje, List<T> entidades)
         {
             Mensaje = mensaje;
-            Entidades = entidad;
+            Entidades = entidades;
         }
 
         public Response(string mensaje, T entidad)

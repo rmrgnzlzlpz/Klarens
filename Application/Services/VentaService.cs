@@ -6,7 +6,7 @@ using Domain.Entities;
 
 namespace Application.Services
 {
-    public class VentaService : BaseService<Venta>
+    public class VentaService : Service<Venta>
     {
         private ProductoService _productoService;
         public VentaService(IUnitOfWork unitOfWork) : base(unitOfWork, unitOfWork.VentaRepository)
@@ -14,15 +14,12 @@ namespace Application.Services
             _productoService = new ProductoService(_unitOfWork);
         }
 
-        public IResponse<Venta> Add(VentaRequest request)
+        public Response<Venta> Add(VentaRequest request)
         {
             Vendedor vendedor = _unitOfWork.VendedorRepository.FindFirstOrDefault(x => x.Persona.Documento.Numero == request.DocumentoVendedor);
             if (vendedor == null)
             {
-                return new Response<Venta>
-                (
-                    mensaje: $"Vendedor con documento {request.DocumentoVendedor} no encontrado"
-                );
+                return new VentaResponse($"Vendedor con documento {request.DocumentoVendedor} no encontrado");
             }
 
             List<VentaDetalle> Detalles = new List<VentaDetalle>();
@@ -30,7 +27,7 @@ namespace Application.Services
             {
                 if (_productoService.Disponible(item.CodigoProducto, item.CodigoBodega, item.Cantidad) == false)
                 {
-                    return new Response<Venta>
+                    return new VentaResponse
                     (
                         mensaje: $"El producto {item.CodigoProducto} no está disponible para esa cantidad."
                     );
@@ -45,7 +42,7 @@ namespace Application.Services
 
             vendedor.Ventas.Add(venta);
 
-            return new Response<Venta>
+            return new VentaResponse
             (
                 mensaje: "Venta registrada correctamente",
                 entidad: venta

@@ -5,23 +5,24 @@ using Domain.Entities;
 
 namespace Application.Services
 {
-    public class UsuarioService : BaseService<Usuario>
+    public class UsuarioService : Service<Usuario>
     {
         public UsuarioService(IUnitOfWork unitOfWork) : base(unitOfWork, unitOfWork.UsuarioRepository)
         {
         }
 
-        public IResponse<Usuario> Add(UsuarioRequest request)
+        public Response<Usuario> Add(UsuarioRequest request)
         {
-            Usuario usuario = _repository.FindFirstOrDefault(x => x.Username == request.Username);
-            if (usuario == null)
+            Usuario entity = _repository.FindFirstOrDefault(x => x.Username == request.Username);
+            if (entity == null)
             {
-                return new Response<Usuario>(
-                    mensaje: $"El usuario {request.Username} ya existe",
-                    entidad: request.ToEntity()
-                );
+                return new UsuarioResponse($"El usuario {request.Username} ya existe",request.ToEntity());
             }
-            return base.Add(request.ToEntity());
+            if (base.Add(entity) < 1)
+            {
+                return new UsuarioResponse("No se pudo registrar el vehículo");
+            }
+            return new UsuarioResponse("Vehículo registrado", entity);
         }
     }
 }

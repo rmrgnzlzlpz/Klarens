@@ -5,15 +5,21 @@ using Domain.Entities;
 
 namespace Application.Services
 {
-    public class RutaService : BaseService<Ruta>
+    public class RutaService : Service<Ruta>
     {
         public RutaService(IUnitOfWork unitOfWork) : base(unitOfWork, unitOfWork.RutaRepository)
         {
         }
 
-        public IResponse<Ruta> Add(RutaRequest request)
+        public Response<Ruta> Add(RutaRequest request)
         {
-            return base.Add(request.ToEntity());
+            Ruta entity = request.ToEntity();
+            
+            if (base.Add(entity) < 1)
+            {
+                return new RutaResponse("Ruta no registrada");
+            }
+            return new RutaResponse("Ruta registrada", entity);
         }
     }
 }

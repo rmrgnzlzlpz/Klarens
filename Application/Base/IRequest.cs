@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Application.Base
 {
-    public interface IRequest<T> where T : BaseEntity
+    public interface IRequest<T>
     {
         T ToEntity();
     }

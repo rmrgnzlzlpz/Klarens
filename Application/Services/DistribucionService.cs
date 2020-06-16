@@ -5,15 +5,21 @@ using Domain.Entities;
 
 namespace Application.Services
 {
-    public class DistribucionService : BaseService<Distribucion>
+    public class DistribucionService : Service<Distribucion>
     {
         public DistribucionService(IUnitOfWork unitOfWork) : base(unitOfWork, unitOfWork.DistribucionRepository)
         {
         }
 
-        public IResponse<Distribucion> Add(DistribucionRequest request)
+        public Response<Distribucion> Add(DistribucionRequest request)
         {
-            return base.Add(request.ToEntity());
+            Distribucion entity = request.ToEntity();
+            
+            if (base.Add(entity) < 1)
+            {
+                return new DistribucionResponse("Distribucion no registrada");
+            }
+            return new DistribucionResponse("Distribucion registrada", entity);
         }
     }
 }

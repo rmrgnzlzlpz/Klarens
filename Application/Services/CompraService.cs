@@ -5,15 +5,21 @@ using Domain.Entities;
 
 namespace Application.Services
 {
-    public class CompraService : BaseService<Compra>
+    public class CompraService : Service<Compra>
     {
         public CompraService(IUnitOfWork unitOfWork) : base(unitOfWork, unitOfWork.CompraRepository)
         {
         }
 
-        public IResponse<Compra> Add(CompraRequest request)
+        public Response<Compra> Add(CompraRequest request)
         {
-            return base.Add(request.ToEntity());
+            Compra entity = request.ToEntity();
+            
+            if (base.Add(entity) < 1)
+            {
+                return new CompraResponse("Compra no registrada");
+            }
+            return new CompraResponse("Compra registrada", entity);
         }
     }
 }

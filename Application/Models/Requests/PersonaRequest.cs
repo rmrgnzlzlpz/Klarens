@@ -1,13 +1,9 @@
 ﻿using Application.Base;
 using Domain.Entities;
 using Domain.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace Application.Models
 {
-    public class PersonaRequest : IRequest<Persona>
+    public class PersonaRequest : Request<Persona>
     {
         public string Nombre { get; set; }
         public string NumeroDocumento { get; set; }
@@ -15,7 +11,7 @@ namespace Application.Models
         public DireccionRequest Direccion { get; set; }
         public string Telefono { get; set; }
         public string Email { get; set; }
-        public Persona ToEntity()
+        public override Persona ToEntity()
         {
             return new Persona
             {
@@ -25,6 +21,16 @@ namespace Application.Models
                 Telefono = this.Telefono,
                 Email = this.Email
             };
+        }
+    }
+
+    public class FromPersonaRequest : Request<Domain.Base.BaseEntity>
+    {
+        public PersonaRequest Persona { get; set; }
+        public UsuarioRequest Usuario { get; set; }
+        public override Domain.Base.BaseEntity ToEntity()
+        {
+            return null;
         }
     }
 }

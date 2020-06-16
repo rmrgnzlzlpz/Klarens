@@ -1,25 +1,16 @@
 ﻿using Application.Base;
 using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Application.Models
 {
-    public class UsuarioRequest : IRequest<Usuario>
+    public class UsuarioRequest : Request<Usuario>
     {
-        public int PersonaId { get; set; }
-        public int RolId { get; set; }
+        public string Rol { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public Usuario ToEntity()
+        public override Usuario ToEntity()
         {
-            return new Usuario
-            (
-                rol: new Rol { Id = RolId },
-                username: Username,
-                password: Password
-            );
+            return new Usuario(Username,  Password);
         }
     }
 }

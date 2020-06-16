@@ -5,15 +5,21 @@ using Domain.Entities;
 
 namespace Application.Services
 {
-    public class CategoriaService : BaseService<Categoria>
+    public class CategoriaService : Service<Categoria>
     {
         public CategoriaService(IUnitOfWork unitOfWork) : base(unitOfWork, unitOfWork.CategoriaRepository)
         {
         }
 
-        public IResponse<Categoria> Add(CategoriaRequest request)
+        public Response<Categoria> Add(CategoriaRequest request)
         {
-            return base.Add(request.ToEntity());
+            Categoria entity = request.ToEntity();
+            
+            if (base.Add(entity) < 1)
+            {
+                return new CategoriaResponse("Categoria no registrada");
+            }
+            return new CategoriaResponse("Categoria registrada", entity);
         }
     }
 }

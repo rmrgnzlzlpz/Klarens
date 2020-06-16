@@ -5,15 +5,21 @@ using Domain.Entities;
 
 namespace Application.Services
 {
-    public class DeudaService : BaseService<Deuda>
+    public class DeudaService : Service<Deuda>
     {
         public DeudaService(IUnitOfWork unitOfWork) : base(unitOfWork, unitOfWork.DeudaRepository)
         {
         }
 
-        public IResponse<Deuda> Add(DeudaRequest request)
+        public Response<Deuda> Add(DeudaRequest request)
         {
-            return base.Add(request.ToEntity());
+            Deuda entity = request.ToEntity();
+            
+            if (base.Add(entity) < 1)
+            {
+                return new DeudaResponse("Deuda no registrada");
+            }
+            return new DeudaResponse("Deuda registrada", entity);
         }
         /*
         public IResponse<Deuda> Abonar(PagoRequest pago)

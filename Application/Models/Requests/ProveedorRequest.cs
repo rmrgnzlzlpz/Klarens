@@ -3,10 +3,10 @@ using Domain.Entities;
 
 namespace Application.Models
 {
-    public class ProveedorRequest : IRequest<Proveedor>
+    public class ProveedorRequest : Request<Proveedor>
     {
         public string NumeroDocumento { get; set; }
-        public Proveedor ToEntity()
+        public override Proveedor ToEntity()
         {
             return new Proveedor();
         }

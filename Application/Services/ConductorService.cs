@@ -5,15 +5,21 @@ using Domain.Entities;
 
 namespace Application.Services
 {
-    public class ConductorService : BaseService<Conductor>
+    public class ConductorService : Service<Conductor>
     {
         public ConductorService(IUnitOfWork unitOfWork) : base(unitOfWork, unitOfWork.ConductorRepository)
         {
         }
 
-        public IResponse<Conductor> Add(ConductorRequest request)
+        public Response<Conductor> Add(ConductorRequest request)
         {
-            return base.Add(request.ToEntity());
+            Conductor entity = request.ToEntity();
+            
+            if (base.Add(entity) < 1)
+            {
+                return new ConductorResponse("Conductor no registrado");
+            }
+            return new ConductorResponse("Conductor registrado", entity);
         }
     }
 }

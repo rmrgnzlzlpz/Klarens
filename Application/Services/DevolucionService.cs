@@ -5,15 +5,21 @@ using Domain.Entities;
 
 namespace Application.Services
 {
-    public class DevolucionService : BaseService<Devolucion>
+    public class DevolucionService : Service<Devolucion>
     {
         public DevolucionService(IUnitOfWork unitOfWork) : base(unitOfWork, unitOfWork.DevolucionRepository)
         {
         }
 
-        public IResponse<Devolucion> Add(DevolucionRequest request)
+        public Response<Devolucion> Add(DevolucionRequest request)
         {
-            return base.Add(request.ToEntity());
+            Devolucion entity = request.ToEntity();
+            
+            if (base.Add(entity) < 1)
+            {
+                return new DevolucionResponse("Devolucion no registrada");
+            }
+            return new DevolucionResponse("Devolucion registrada", entity);
         }
     }
 }

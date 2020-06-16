@@ -5,15 +5,20 @@ using Domain.Entities;
 
 namespace Application.Services
 {
-    public class VehiculoService : BaseService<Vehiculo>
+    public class VehiculoService : Service<Vehiculo>
     {
         public VehiculoService(IUnitOfWork unitOfWork) : base(unitOfWork, unitOfWork.VehiculoRepository)
         {
         }
 
-        public IResponse<Vehiculo> Add(VehiculoRequest request)
+        public Response<Vehiculo> Add(VehiculoRequest request)
         {
-            return base.Add(request.ToEntity());
+            Vehiculo entity = request.ToEntity();
+            if (base.Add(entity) < 1)
+            {
+                return new VehiculoResponse("No se pudo registrar el vehículo");
+            }
+            return new VehiculoResponse("Vehículo registrado", entity);
         }
     }
 }

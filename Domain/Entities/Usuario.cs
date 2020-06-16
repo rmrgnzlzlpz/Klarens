@@ -10,13 +10,17 @@ namespace Domain.Entities
         public string Password { get; set; }
         public UsuarioEstado Estado { get; set; }
 
-        public Usuario() {}
-        
-        public Usuario(Rol rol, string username, string password)
+        public Usuario() { }
+
+        public Usuario(string username, string password)
         {
-            Rol = rol;
             Username = username;
             Password = password;
+        }
+
+        public Usuario(Rol rol, string username, string password) : this(username, password)
+        {
+            Rol = rol;
         }
     }
 

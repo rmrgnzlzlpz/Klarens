@@ -5,15 +5,21 @@ using Domain.Entities;
 
 namespace Application.Services
 {
-    public class RolService : BaseService<Rol>
+    public class RolService : Service<Rol>
     {
         public RolService(IUnitOfWork unitOfWork) : base(unitOfWork, unitOfWork.RolRepository)
         {
         }
 
-        public IResponse<Rol> Add(RolRequest request)
+        public Response<Rol> Add(RolRequest request)
         {
-            return base.Add(request.ToEntity());
+            Rol entity = request.ToEntity();
+            
+            if (base.Add(entity) < 1)
+            {
+                return new RolResponse("Rol no registrado");
+            }
+            return new RolResponse("Rol registrado", entity);
         }
     }
 }

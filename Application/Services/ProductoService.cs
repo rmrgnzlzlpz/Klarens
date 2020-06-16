@@ -5,23 +5,29 @@ using Domain.Entities;
 
 namespace Application.Services
 {
-    public class ProductoService : BaseService<Producto>
+    public class ProductoService : Service<Producto>
     {
         public ProductoService(IUnitOfWork unitOfWork) : base(unitOfWork, unitOfWork.ProductoRepository)
         {
         }
 
-        public IResponse<Producto> Add(ProductoRequest request)
+        public Response<Producto> Add(ProductoRequest request)
         {
             Producto producto = _repository.FindFirstOrDefault(x => x.Codigo == request.Codigo);
             if (producto != null)
             {
-                return new Response<Producto>(
+                return new ProductoResponse(
                     mensaje: $"El producto con código {request.Codigo} ya existe",
                     entidad: request.ToEntity()
                 );
             }
-            return base.Add(request.ToEntity());
+            Producto entity = request.ToEntity();
+            
+            if (base.Add(entity) < 1)
+            {
+                return new ProductoResponse("Producto no registrado");
+            }
+            return new ProductoResponse("Producto registrado", entity);
         }
 
         public bool Disponible(string codigoProducto, string codigoBodega, int cantidad)

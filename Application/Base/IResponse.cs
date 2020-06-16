@@ -7,6 +7,6 @@ namespace Application.Base
     public interface IResponse<T>
     {
         string Mensaje { get;}
-        IList<T> Entidades { get; }
+        List<T> Entidades { get; }
     }
 }

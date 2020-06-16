@@ -1,9 +1,7 @@
 ﻿using Application.Base;
 using Domain.Entities;
 using Domain.ValueObjects;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Application.Models
 {
@@ -13,16 +11,16 @@ namespace Application.Models
         public List<VentaDetalleRequest> Detalles { get; set; }
         public string NumeroComprobante { get; set; }
         public ComprobanteTipo TipoComprobante { get; set; }
-        public double Pagado { get; set; }
+        public double Abonado { get; set; }
         public VentaEstado Estado { get; set; }
         public double Impuesto { get; set; }
-        public int UsuarioId { get; set; }
+        public int Username { get; set; }
         public Venta ToEntity()
         {
             return new Venta(null)
             {
                 Comprobante = new Comprobante { Numero = NumeroComprobante, Tipo = TipoComprobante },
-                Pagado = this.Pagado,
+                Pagado = this.Abonado,
                 Estado = this.Estado,
                 Impuesto = this.Impuesto
             };
@@ -36,6 +34,7 @@ namespace Application.Models
         public int Cantidad { get; set; }
         public double Precio { get; set; }
         public double Descuento { get; set; }
+        private Producto Producto { get; set; }
 
         public VentaDetalle ToEntity()
         {
@@ -43,7 +42,7 @@ namespace Application.Models
             {
                 Cantidad = this.Cantidad,
                 Precio = this.Precio,
-                Descuento = this.Descuento
+                Descuento = this.Descuento,
             };
         }
     }
