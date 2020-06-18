@@ -21,6 +21,7 @@ namespace Domain.Builders
 
         public CompraBuilder AgregarDetalle(Producto producto, int cantidad, double precio)
         {
+            totalDetalles++;
             Detalles.Add(new CompraDetalle
             {
                 Producto = producto,

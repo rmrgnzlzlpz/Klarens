@@ -55,7 +55,7 @@ namespace Application.Services
 
         public CompraResponse All(uint pagina, uint cantidad)
         {
-            return new CompraResponse("Ventas consultadas", base.Get(page: pagina, size: cantidad));
+            return new CompraResponse("Compras consultadas", base.Get(page: pagina, size: cantidad));
         }
     }
 }

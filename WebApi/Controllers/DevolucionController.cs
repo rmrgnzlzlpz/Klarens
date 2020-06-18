@@ -26,5 +26,12 @@ namespace WebApi.Controllers
 
             return Ok(response);
         }
+
+        [HttpGet("{pagina}/{cantidad}")]
+        public ActionResult<DevolucionResponse> All(uint pagina, uint cantidad)
+        {
+            var response = _service.All(pagina, cantidad);
+            return response;
+        }
     }
 }

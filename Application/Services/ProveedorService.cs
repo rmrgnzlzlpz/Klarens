@@ -22,9 +22,10 @@ namespace Application.Services
             return new ProveedorResponse("Proveedor registrada", entity);
         }
 
-        public ProveedorResponse FromPersona(ConPersonaRequest request)
+        public ProveedorResponse ConPersona(ConPersonaRequest request)
         {
             Persona persona = _unitOfWork.PersonaRepository.FindFirstOrDefault(x => x.Documento.Numero == request.Persona.NumeroDocumento);
+            
             if (persona == null)
             {
                 return new ProveedorResponse("No existe la persona con este número de documento");

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Documents\\Datos\\10mo Semestre\\TDD\\Proyecto\\Klarens\\Klarens\\Application\\Application.csproj": {}
+    "d:\\Documents\\Datos\\10mo Semestre\\TDD\\Proyecto\\Klarens\\Klarens\\Application\\Application.csproj": {}
   },
   "projects": {
-    "D:\\Documents\\Datos\\10mo Semestre\\TDD\\Proyecto\\Klarens\\Klarens\\Application\\Application.csproj": {
+    "d:\\Documents\\Datos\\10mo Semestre\\TDD\\Proyecto\\Klarens\\Klarens\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Documents\\Datos\\10mo Semestre\\TDD\\Proyecto\\Klarens\\Klarens\\Application\\Application.csproj",
+        "projectUniqueName": "d:\\Documents\\Datos\\10mo Semestre\\TDD\\Proyecto\\Klarens\\Klarens\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "D:\\Documents\\Datos\\10mo Semestre\\TDD\\Proyecto\\Klarens\\Klarens\\Application\\Application.csproj",
+        "projectPath": "d:\\Documents\\Datos\\10mo Semestre\\TDD\\Proyecto\\Klarens\\Klarens\\Application\\Application.csproj",
         "packagesPath": "C:\\Users\\RmrGnzlz\\.nuget\\packages\\",
-        "outputPath": "D:\\Documents\\Datos\\10mo Semestre\\TDD\\Proyecto\\Klarens\\Klarens\\Application\\obj\\",
+        "outputPath": "d:\\Documents\\Datos\\10mo Semestre\\TDD\\Proyecto\\Klarens\\Klarens\\Application\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\RmrGnzlz\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -27,8 +27,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "D:\\Documents\\Datos\\10mo Semestre\\TDD\\Proyecto\\Klarens\\Klarens\\Domain\\Domain.csproj": {
-                "projectPath": "D:\\Documents\\Datos\\10mo Semestre\\TDD\\Proyecto\\Klarens\\Klarens\\Domain\\Domain.csproj"
+              "d:\\Documents\\Datos\\10mo Semestre\\TDD\\Proyecto\\Klarens\\Klarens\\Domain\\Domain.csproj": {
+                "projectPath": "d:\\Documents\\Datos\\10mo Semestre\\TDD\\Proyecto\\Klarens\\Klarens\\Domain\\Domain.csproj"
               }
             }
           }
@@ -45,6 +45,10 @@
             "Microsoft.AspNetCore.Identity": {
               "target": "Package",
               "version": "[2.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.5, )"
             }
           },
           "imports": [
@@ -66,14 +70,14 @@
         }
       }
     },
-    "D:\\Documents\\Datos\\10mo Semestre\\TDD\\Proyecto\\Klarens\\Klarens\\Domain\\Domain.csproj": {
+    "d:\\Documents\\Datos\\10mo Semestre\\TDD\\Proyecto\\Klarens\\Klarens\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Documents\\Datos\\10mo Semestre\\TDD\\Proyecto\\Klarens\\Klarens\\Domain\\Domain.csproj",
+        "projectUniqueName": "d:\\Documents\\Datos\\10mo Semestre\\TDD\\Proyecto\\Klarens\\Klarens\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "D:\\Documents\\Datos\\10mo Semestre\\TDD\\Proyecto\\Klarens\\Klarens\\Domain\\Domain.csproj",
+        "projectPath": "d:\\Documents\\Datos\\10mo Semestre\\TDD\\Proyecto\\Klarens\\Klarens\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\RmrGnzlz\\.nuget\\packages\\",
-        "outputPath": "D:\\Documents\\Datos\\10mo Semestre\\TDD\\Proyecto\\Klarens\\Klarens\\Domain\\obj\\",
+        "outputPath": "d:\\Documents\\Datos\\10mo Semestre\\TDD\\Proyecto\\Klarens\\Klarens\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\RmrGnzlz\\AppData\\Roaming\\NuGet\\NuGet.Config",

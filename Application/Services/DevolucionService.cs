@@ -45,5 +45,10 @@ namespace Application.Services
             }
             return new DevolucionResponse("Devolucion registrada", entity);
         }
+
+        public DevolucionResponse All(uint page, uint size)
+        {
+            return new DevolucionResponse("Devoluciones consultadas", base.Get(page: page, size: size));
+        }
     }
 }
