@@ -18,7 +18,7 @@ namespace Application.Models
             {
                 Nombre = this.Nombre,
                 Documento = new Comprobante { Numero = NumeroDocumento, Tipo = TipoDocumento },
-                Direccion = this.Direccion.ToEntity(),
+                Direccion = (Direccion?? (Direccion = new DireccionRequest())).ToEntity(),
                 Telefono = this.Telefono,
                 Email = this.Email
             };
