@@ -2,7 +2,7 @@
 using Domain.ValueObjects;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace Domain.Builders
 {
@@ -11,6 +11,7 @@ namespace Domain.Builders
         public List<String> Errores { get; private set; }
         public List<CompraDetalle> Detalles { get; private set; }
         public Comprobante Comprobante { get; private set; }
+        private int totalDetalles;
 
         public CompraBuilder(string numeroFactura)
         {
@@ -28,44 +29,33 @@ namespace Domain.Builders
             });
             return this;
         }
-        public Compra Build(Comprobante comprobante, double abonado, double impuesto)
+        public Compra Build(double abonado, double impuesto)
         {
+            if (IsOk().Any()) throw new Exception(string.Join(',', Errores));
             return new Compra(Detalles)
             {
-                Comprobante = comprobante,
+                Comprobante = Comprobante,
                 Pagado = abonado,
                 Impuesto = impuesto
             };
         }
-
-        public Devolucion Build()
-        {
-            if (IsOk().Any()) throw new Exception(string.Join(',', Errores));
-            return new Devolucion(Venta, Detalles) { Descripcion = Descripcion };
-        }
-
         public List<string> IsOk()
         {
             Errores = new List<string>();
             if (Detalles == null)
             {
-                Errores.Add("La devolución debe tener mínimo un producto");
+                Errores.Add("La compra debe tener mínimo un producto");
             }
-            if (Detalles.Count < 1)
+            else
             {
-                Errores.Add("La devolución debe tener mínimo un producto");
-            }
-            if (Venta.VentaDetalles == null)
-            {
-                Errores.Add("La venta debe tener mínimo un detalle");
-            }
-            if (Venta == null)
-            {
-                Errores.Add("No hay una venta válida para devolver");
-            }
-            if (TotalDetalles < Detalles.Count)
-            {
-                Errores.Add($"No se agregaron todos los detalles ({Detalles.Count} de {TotalDetalles})");
+                if (Detalles.Count < 1)
+                {
+                    Errores.Add("La compra debe tener mínimo un producto");
+                }
+                if (totalDetalles < Detalles.Count)
+                {
+                    Errores.Add($"No se agregaron todos los detalles ({Detalles.Count} de {totalDetalles})");
+                }
             }
             return Errores;
         }

@@ -9,8 +9,7 @@ namespace Application.Models
     {
         public List<CompraDetalleRequest> Detalles { get; set; }
         public string DocumentoProveedor { get; set; }
-        public string NumeroComprobante { get; set; }
-        public ComprobanteTipo TipoComprobante { get; set; }
+        public string NumeroFactura { get; set; }
         public double Pagado { get; set; }
         public double Impuesto { get; set; }
 
@@ -18,7 +17,7 @@ namespace Application.Models
         {
             return new Compra
             {
-                Comprobante = new Comprobante { Tipo = TipoComprobante, Numero = NumeroComprobante },
+                Comprobante = new Comprobante { Tipo = ComprobanteTipo.Factura, Numero = NumeroFactura },
                 Pagado = this.Pagado,
                 Impuesto = this.Impuesto,
             };

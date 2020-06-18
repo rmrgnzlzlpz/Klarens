@@ -60,21 +60,28 @@ namespace Domain.Builders
             {
                 Errores.Add("La devolución debe tener mínimo un producto");
             }
-            if (Detalles.Count < 1)
+            else
             {
-                Errores.Add("La devolución debe tener mínimo un producto");
+                if (Detalles.Count < 1)
+                {
+                    Errores.Add("La devolución debe tener mínimo un producto");
+                }
+                if (TotalDetalles < Detalles.Count)
+                {
+                    Errores.Add($"No se agregaron todos los detalles ({Detalles.Count} de {TotalDetalles})");
+                }
             }
-            if (Venta.VentaDetalles == null)
-            {
-                Errores.Add("La venta debe tener mínimo un detalle");
-            }
+
             if (Venta == null)
             {
                 Errores.Add("No hay una venta válida para devolver");
             }
-            if (TotalDetalles < Detalles.Count)
+            else
             {
-                Errores.Add($"No se agregaron todos los detalles ({Detalles.Count} de {TotalDetalles})");
+                if (Venta.VentaDetalles == null)
+                {
+                    Errores.Add("La venta debe tener mínimo un detalle");
+                }
             }
             return Errores;
         }

@@ -23,7 +23,7 @@ namespace Domain.Entities
         public bool ExisteProducto(Producto producto)
         {
             if (ProductoBodegas == null) return false;
-            return ProductoBodegas.FirstOrDefault(x => x.Producto == producto) != null;
+            return ProductoBodegas.FirstOrDefault(x => x.Producto.Codigo == producto.Codigo) != null;
         }
 
         public ProductoBodega AgregarProducto(Producto producto, int cantidad)
