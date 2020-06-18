@@ -26,21 +26,6 @@ namespace WebApi.Controllers
             return Ok(response);
         }
 
-        [HttpPost("vendedor")]
-        public ActionResult<IResponse<Vendedor>> ToVendedor(VendedorRequest request)
-        {
-            IResponse<Vendedor> response = _service.ToVendedor(request);
-            if (response.Entidades == null) return  BadRequest(response);
-            return Ok(response);
-        }
-
-        [HttpGet("{documento}")]
-        public ActionResult<IResponse<Persona>> Get(string documento)
-        {
-            var response = _service.Get(x => x.Documento.Numero == documento);
-            return Ok(response);
-        }
-
         [HttpGet]
         public ActionResult<IResponse<Persona>> GetAll(PersonaRequest request)
         {

@@ -14,8 +14,8 @@ namespace Application.Services
         public Response<Devolucion> Add(DevolucionRequest request)
         {
             Devolucion entity = request.ToEntity();
-            
-            if (base.Add(entity) < 1)
+            base.Add(entity);
+            if (entity.Id == 0)
             {
                 return new DevolucionResponse("Devolucion no registrada");
             }

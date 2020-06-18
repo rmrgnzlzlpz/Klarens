@@ -14,17 +14,26 @@ namespace Application.Services
             _productoService = new ProductoService(_unitOfWork);
         }
 
-        public Response<Venta> Add(VentaRequest request)
+        public VentaResponse Add(VentaRequest request)
         {
             Vendedor vendedor = _unitOfWork.VendedorRepository.FindFirstOrDefault(x => x.Persona.Documento.Numero == request.DocumentoVendedor);
             if (vendedor == null)
             {
                 return new VentaResponse($"Vendedor con documento {request.DocumentoVendedor} no encontrado");
             }
+            if (_repository.FindFirstOrDefault(x => x.Comprobante.Numero == request.NumeroFactura) != null)
+            {
+                return new VentaResponse($"La factura {request.NumeroFactura} ya está registrada");
+            }
 
             List<VentaDetalle> Detalles = new List<VentaDetalle>();
             foreach (var item in request.Detalles)
             {
+                ProductoBodega producto = _productoService.ProductoEnBodega(item.CodigoProducto, item.CodigoBodega);
+                if (producto == null)
+                {
+                    return new VentaResponse($"Producto {item.CodigoProducto} no está disponible en bodega {item.CodigoBodega}");
+                }
                 if (_productoService.Disponible(item.CodigoProducto, item.CodigoBodega, item.Cantidad) == false)
                 {
                     return new VentaResponse
@@ -33,7 +42,7 @@ namespace Application.Services
                     );
                 }
                 VentaDetalle detalle = item.ToEntity();
-                detalle.ProductoBodega = _productoService.ProductoEnBodega(item.CodigoProducto, item.CodigoBodega);
+                detalle.ProductoBodega = producto;
                 Detalles.Add(detalle);
             }
 
@@ -41,6 +50,8 @@ namespace Application.Services
             venta.VentaDetalles = Detalles;
 
             vendedor.Ventas.Add(venta);
+
+            _unitOfWork.Commit();
 
             return new VentaResponse
             (

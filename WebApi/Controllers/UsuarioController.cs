@@ -1,9 +1,11 @@
-﻿using Application.Base;
+﻿using System;
+using System.Linq;
+using Application.Base;
 using Application.Models;
 using Application.Services;
 using Domain.Contracts;
-using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.Authentication;
 
 namespace WebApi.Controllers
 {
@@ -13,37 +15,61 @@ namespace WebApi.Controllers
     {
         readonly IUnitOfWork _unitOfWork;
         readonly UsuarioService _service;
-        public UsuarioController(IUnitOfWork unitOfWork)
+        readonly ITokenProvider _tokenProvider;
+        public UsuarioController(IUnitOfWork unitOfWork, ITokenProvider tokenProvider)
         {
+            _tokenProvider = tokenProvider;
             _unitOfWork = unitOfWork;
             _service = new UsuarioService(_unitOfWork);
         }
 
         [HttpGet("{pagina}/{cantidad}")]
-        public ActionResult<IResponse<Usuario>> GetAll(uint pagina = 0, uint cantidad = 10)
+        public ActionResult<UsuarioResponse> GetAll(uint pagina = 0, uint cantidad = 10)
         {
-            return Ok(_service.Get(page: pagina, size: cantidad));
+            return Ok(_service.GetBy(page: pagina, size: cantidad));
         }
 
         [HttpGet]
-        public ActionResult<IResponse<Usuario>> Get(string username)
+        public ActionResult<UsuarioResponse> Get(string username)
         {
-            var response = _service.Get(x => x.Username == username);
+            var response = _service.GetBy(x => x.Username == username);
             return Ok(response);
         }
 
         [HttpGet("search")]
-        public ActionResult<IResponse<Usuario>> Search(UsuarioRequest request)
+        public ActionResult<UsuarioResponse> Search(UsuarioRequest request)
         {
-            var response = _service.Get(x => x.Estado == UsuarioEstado.Activo);
+            var response = _service.GetBy(x => x.Estado == Domain.Entities.UsuarioEstado.Activo && x.Username.ToUpper().Contains(request.Username.ToUpper()) || x.Rol.Nombre.ToUpper().Contains(request.Rol.ToUpper()));
             return Ok(Response);
         }
 
         [HttpPost]
-        public ActionResult<IResponse<Usuario>> Post(UsuarioRequest request)
+        public ActionResult<UsuarioResponse> Post(UsuarioRequest request)
         {
             var response = _service.Add(request);
             return Ok(response);
+        }
+
+        [HttpPost("auth")]
+        public ActionResult<JsonWebToken> Auth(UsuarioRequest request)
+        {
+            var response = _service.Validar(request);
+
+            if (response.Entidades == null)
+            {
+                return Unauthorized();
+            }
+            var user = response.Entidades.FirstOrDefault();
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+            
+            return Ok(new JsonWebToken
+            {
+                Access_token = _tokenProvider.CreateToken(user, DateTime.UtcNow.AddHours(5)),
+                Expires_in = 5*60
+            });
         }
     }
 }

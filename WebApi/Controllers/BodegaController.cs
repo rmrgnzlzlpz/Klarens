@@ -22,13 +22,13 @@ namespace WebApi.Controllers
         [HttpGet("{pagina}/{cantidad}")]
         public ActionResult<IResponse<Producto>> GetAll(uint pagina = 0, uint cantidad = 10)
         {
-            return Ok(_service.Get(page: pagina, size: cantidad));
+            return Ok(_service.GetBy(page: pagina, size: cantidad));
         }
 
         [HttpGet("codigo")]
         public ActionResult<IResponse<Producto>> Get(string codigo)
         {
-            var response = _service.Get(x => x.Codigo == codigo);
+            var response = _service.GetBy(x => x.Codigo == codigo);
             return Ok(response);
         }
 

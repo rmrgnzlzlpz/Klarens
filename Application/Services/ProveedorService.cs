@@ -11,18 +11,18 @@ namespace Application.Services
         {
         }
 
-        public ProveedorResponse Add(ProveedorRequest request)
+        public ProveedorResponse Add(PersonaDerivadoRequest request)
         {
-            Proveedor entity = request.ToEntity();
-            
-            if (base.Add(entity) < 1)
+            Proveedor entity = new Proveedor();
+            base.Add(entity);
+            if (entity.Id == 0)
             {
                 return new ProveedorResponse("Proveedor no registrada");
             }
             return new ProveedorResponse("Proveedor registrada", entity);
         }
 
-        public ProveedorResponse FromPersona(FromPersonaRequest request)
+        public ProveedorResponse FromPersona(ConPersonaRequest request)
         {
             Persona persona = _unitOfWork.PersonaRepository.FindFirstOrDefault(x => x.Documento.Numero == request.Persona.NumeroDocumento);
             if (persona == null)
@@ -30,7 +30,7 @@ namespace Application.Services
                 return new ProveedorResponse("No existe la persona con este número de documento");
             }
 
-            var proveedorRequest = new ProveedorRequest { NumeroDocumento = request.Persona.NumeroDocumento };
+            var proveedorRequest = new PersonaDerivadoRequest { NumeroDocumento = request.Persona.NumeroDocumento };
             return Add(proveedorRequest);
         }
     }

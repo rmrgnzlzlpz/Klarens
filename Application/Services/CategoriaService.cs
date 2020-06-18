@@ -14,8 +14,8 @@ namespace Application.Services
         public Response<Categoria> Add(CategoriaRequest request)
         {
             Categoria entity = request.ToEntity();
-            
-            if (base.Add(entity) < 1)
+            base.Add(entity);
+            if (entity.Id == 0)
             {
                 return new CategoriaResponse("Categoria no registrada");
             }

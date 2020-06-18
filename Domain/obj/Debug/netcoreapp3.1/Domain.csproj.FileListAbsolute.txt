@@ -1,9 +1,9 @@
 D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\Domain\bin\Debug\netcoreapp3.1\Domain.deps.json
 D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\Domain\bin\Debug\netcoreapp3.1\Domain.dll
 D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\Domain\bin\Debug\netcoreapp3.1\Domain.pdb
-D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\Domain\obj\Debug\netcoreapp3.1\Domain.csprojAssemblyReference.cache
 D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\Domain\obj\Debug\netcoreapp3.1\Domain.csproj.CoreCompileInputs.cache
 D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\Domain\obj\Debug\netcoreapp3.1\Domain.AssemblyInfoInputs.cache
 D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\Domain\obj\Debug\netcoreapp3.1\Domain.AssemblyInfo.cs
 D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\Domain\obj\Debug\netcoreapp3.1\Domain.dll
 D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\Domain\obj\Debug\netcoreapp3.1\Domain.pdb
+D:\Documents\Datos\10mo Semestre\TDD\Proyecto\Klarens\Klarens\Domain\obj\Debug\netcoreapp3.1\Domain.csprojAssemblyReference.cache

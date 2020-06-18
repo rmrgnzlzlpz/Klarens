@@ -14,8 +14,8 @@ namespace Application.Services
         public Response<Distribucion> Add(DistribucionRequest request)
         {
             Distribucion entity = request.ToEntity();
-            
-            if (base.Add(entity) < 1)
+            base.Add(entity);
+            if (entity.Id == 0)
             {
                 return new DistribucionResponse("Distribucion no registrada");
             }

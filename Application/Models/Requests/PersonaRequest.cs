@@ -1,4 +1,5 @@
 ﻿using Application.Base;
+using Domain.Base;
 using Domain.Entities;
 using Domain.ValueObjects;
 namespace Application.Models
@@ -24,11 +25,20 @@ namespace Application.Models
         }
     }
 
-    public class FromPersonaRequest : Request<Domain.Base.BaseEntity>
+    public class ConPersonaRequest : Request<BaseEntity>
     {
         public PersonaRequest Persona { get; set; }
         public UsuarioRequest Usuario { get; set; }
-        public override Domain.Base.BaseEntity ToEntity()
+        public override BaseEntity ToEntity()
+        {
+            return null;
+        }
+    }
+
+    public class PersonaDerivadoRequest : Request<BaseEntity>
+    {
+        public string NumeroDocumento { get; set; }
+        public override BaseEntity ToEntity()
         {
             return null;
         }

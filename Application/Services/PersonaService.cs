@@ -20,7 +20,8 @@ namespace Application.Services
             {
                 return new PersonaResponse($"La persona con {request.TipoDocumento} número {request.NumeroDocumento} se encuentra registrada");
             }
-            if (base.Add(entity) < 1)
+            base.Add(entity);
+            if (entity.Id == 0)
             {
                 return new PersonaResponse("Persona no registrada");
             }

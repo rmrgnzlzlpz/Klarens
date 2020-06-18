@@ -7,22 +7,20 @@ namespace Application.Models
 {
     public class VentaRequest : IRequest<Venta>
     {
+        public string Username { get; set; }
         public string DocumentoVendedor { get; set; }
         public List<VentaDetalleRequest> Detalles { get; set; }
-        public string NumeroComprobante { get; set; }
-        public ComprobanteTipo TipoComprobante { get; set; }
+        public string NumeroFactura { get; set; }
         public double Abonado { get; set; }
-        public VentaEstado Estado { get; set; }
         public double Impuesto { get; set; }
-        public int Username { get; set; }
         public Venta ToEntity()
         {
-            return new Venta(null)
+            return new Venta(new List<VentaDetalle>())
             {
-                Comprobante = new Comprobante { Numero = NumeroComprobante, Tipo = TipoComprobante },
-                Pagado = this.Abonado,
-                Estado = this.Estado,
-                Impuesto = this.Impuesto
+                Comprobante = new Comprobante { Numero = NumeroFactura, Tipo = ComprobanteTipo.Factura },
+                Estado = VentaEstado.Activa,
+                Impuesto = Impuesto,
+                Pagado = Abonado
             };
         }
     }

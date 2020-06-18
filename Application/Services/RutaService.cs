@@ -15,7 +15,8 @@ namespace Application.Services
         {
             Ruta entity = request.ToEntity();
             
-            if (base.Add(entity) < 1)
+            base.Add(entity);
+            if (entity.Id == 0)
             {
                 return new RutaResponse("Ruta no registrada");
             }

@@ -11,6 +11,9 @@ using Infrastructure.Base;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Linq;
+using WebApi.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Api
 {
@@ -39,6 +42,23 @@ namespace Api
             
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IDbContext, KlarensContext>();
+            
+            var tokenProvider = new JwtProvider("issuer", "audience", "rmrgnzlzlpz");
+
+            services.AddSingleton<ITokenProvider>(tokenProvider);
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(
+                options => {
+                    options.RequireHttpsMetadata = false;
+                    options.TokenValidationParameters = tokenProvider.GetValidationParameters();
+                }
+            );
+
+            services.AddAuthorization(auth => {
+                auth.DefaultPolicy = new AuthorizationPolicyBuilder()
+                .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
+                .RequireAuthenticatedUser()
+                .Build();
+            });
 
             services.AddSwaggerGen(c =>
             {
@@ -65,6 +85,7 @@ namespace Api
                 app.UseHsts();
             }
 
+            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             if (!env.IsDevelopment())
@@ -74,6 +95,9 @@ namespace Api
 
             app.UseRouting();
 
+            app.UseAuthorization();
+            app.UseAuthentication();
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

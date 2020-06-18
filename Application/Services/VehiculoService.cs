@@ -14,7 +14,8 @@ namespace Application.Services
         public Response<Vehiculo> Add(VehiculoRequest request)
         {
             Vehiculo entity = request.ToEntity();
-            if (base.Add(entity) < 1)
+            base.Add(entity);
+            if (entity.Id == 0)
             {
                 return new VehiculoResponse("No se pudo registrar el vehículo");
             }

@@ -15,11 +15,17 @@ namespace Application.Services
         {
             Rol entity = request.ToEntity();
             
-            if (base.Add(entity) < 1)
+            base.Add(entity);
+            if (entity.Id == 0)
             {
                 return new RolResponse("Rol no registrado");
             }
             return new RolResponse("Rol registrado", entity);
+        }
+
+        public Rol GetRol(string name)
+        {
+            return _repository.FindFirstOrDefault(x => x.Nombre.ToUpper() == name.ToUpper());
         }
     }
 }

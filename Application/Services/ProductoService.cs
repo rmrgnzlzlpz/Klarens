@@ -2,6 +2,9 @@ using Application.Base;
 using Application.Models;
 using Domain.Contracts;
 using Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Application.Services
 {
@@ -23,7 +26,8 @@ namespace Application.Services
             }
             Producto entity = request.ToEntity();
             
-            if (base.Add(entity) < 1)
+            base.Add(entity);
+            if (entity.Id == 0)
             {
                 return new ProductoResponse("Producto no registrado");
             }
@@ -41,6 +45,11 @@ namespace Application.Services
         public ProductoBodega ProductoEnBodega(string codigoProducto, string codigoBodega)
         {
             return _unitOfWork.ProductoBodegaRepository.FindFirstOrDefault(x => x.Bodega.Codigo == codigoBodega && x.Producto.Codigo == codigoProducto);
+        }
+
+        public ProductoResponse GetBy(Expression<Func<Producto, bool>> expression = null, string include = "", uint page = 0, uint size = 10)
+        {
+            return new ProductoResponse("Productos consultados", base.Get(expression, include, page, size));
         }
     }
 }

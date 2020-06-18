@@ -14,8 +14,8 @@ namespace Application.Services
         public Response<Deuda> Add(DeudaRequest request)
         {
             Deuda entity = request.ToEntity();
-            
-            if (base.Add(entity) < 1)
+            base.Add(entity);
+            if (entity.Id == 0)
             {
                 return new DeudaResponse("Deuda no registrada");
             }
