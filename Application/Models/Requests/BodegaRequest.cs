@@ -7,6 +7,7 @@ namespace Application.Models
     {
         public string Codigo { get; set; }
         public string Descripcion { get; set; }
+        public DireccionRequest Direccion { get; set; }
         public BodegaTipo Tipo { get; set; }
         public BodegaEstado Estado { get; set; }
 

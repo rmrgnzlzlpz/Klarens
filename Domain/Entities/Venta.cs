@@ -37,6 +37,11 @@ namespace Domain.Entities
             Fecha = DateTime.UtcNow;
         }
 
+        public void Devolver(Devolucion devolucion)
+        {
+            (Devoluciones ?? (Devoluciones = new List<Devolucion>())).Add(devolucion);
+        }
+
         public bool Cancelar()
         {
             Estado = VentaEstado.Cancelada;

@@ -18,7 +18,7 @@ namespace Domain.Test
             Rol rol = new Rol { Nombre = "Administrador" };
             Persona persona = new Persona
             {
-                Nombre = "Ramiro González",
+                Nombre = "Ramiro Gonzï¿½lez",
                 Email = "rmrgnzlzlpz@gmail.com",
                 Telefono = "3177471037",
                 Documento = new Comprobante { Numero = "1082480166", Tipo = ValueObjects.ComprobanteTipo.Cedula }
@@ -27,10 +27,10 @@ namespace Domain.Test
             vendedor = new Vendedor(persona, new Usuario(rol, "rmrgnzlz", "238218391283"));
         }
 
-        [Test(Description = "Creamos una venta usando el patrón builder, asignando detalles y al final construyéndola.")]
+        [Test(Description = "Creamos una venta usando el patrï¿½n builder, asignando detalles y al final construyï¿½ndola.")]
         public void ConstruirVenta()
         {
-            VentaBuilder ventaBuilder = new VentaBuilder();
+            VentaBuilder ventaBuilder = new VentaBuilder("12345");
 
             ventaBuilder = ventaBuilder.AgregarDetalle(new ProductoBodega(), 2, 10000, 1200);
             ventaBuilder = ventaBuilder.AgregarDetalle(new ProductoBodega(), 4, 10500, 1200);
@@ -38,7 +38,6 @@ namespace Domain.Test
             ventaBuilder = ventaBuilder.AgregarDetalle(new ProductoBodega(), 5, 10000, 100);
             ventaBuilder = ventaBuilder.AgregarDetalle(new ProductoBodega(), 1, 10000, 0);
             ventaBuilder = ventaBuilder.AgregarDetalle(new ProductoBodega(), 1, 10000, 0);
-            ventaBuilder.AgregarComprobante(new Comprobante { Numero = "12345", Tipo = ComprobanteTipo.Factura });
             venta = ventaBuilder.Build(100000, 10000);
 
             Assert.NotNull(venta.VentaDetalles);
@@ -48,23 +47,10 @@ namespace Domain.Test
         [Test(Description = "Intentamos crear una venta sin detalles")]
         public void ConstruirVentaVacia()
         {
-            VentaBuilder builder = new VentaBuilder();
-            builder.AgregarComprobante(new Comprobante { Numero = "1111", Tipo = ComprobanteTipo.Factura });
+            VentaBuilder builder = new VentaBuilder("1111");
             Exception ex = Assert.Throws<Exception>(() => { builder.Build(0, 0); });
 
-            Assert.IsTrue(ex.Message.Contains("La venta debe tener mínimo un producto"));
+            Assert.IsTrue(ex.Message.Contains("La venta debe tener mï¿½nimo un producto"));
         }
-
-        [Test(Description = "Intentamos crear una venta sin un comprobante")]
-        public void ConstruirVentaSinComprobante()
-        {
-            VentaBuilder builder = new VentaBuilder();
-            builder.AgregarDetalle(new ProductoBodega(), 10, 1000, 100);
-            Exception ex = Assert.Throws<Exception>(() => { builder.Build(0, 0); });
-
-            Assert.IsTrue(ex.Message.Contains("El comprobante no debe estar vacío"));
-        }
-
-        // Validar suma de detalles == total
     }
 }

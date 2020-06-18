@@ -18,4 +18,19 @@ namespace Application.Models
         {
         }
     }
+
+    public class SubcategoriaResponse : Response<Subcategoria>
+    {
+        public SubcategoriaResponse(string mensaje) : base(mensaje)
+        {
+        }
+
+        public SubcategoriaResponse(string mensaje, List<Subcategoria> entidades) : base(mensaje, entidades)
+        {
+        }
+
+        public SubcategoriaResponse(string mensaje, Subcategoria entidad) : base(mensaje, entidad)
+        {
+        }
+    }
 }

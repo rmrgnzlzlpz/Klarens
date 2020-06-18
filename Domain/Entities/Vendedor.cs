@@ -38,5 +38,10 @@ namespace Domain.Entities
             Persona = persona;
             Usuario = usuario;
         }
+
+        public void Vender(Venta venta)
+        {
+            (Ventas ?? (Ventas = new List<Venta>())).Add(venta);
+        }
     }
 }

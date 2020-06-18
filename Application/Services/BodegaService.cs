@@ -14,10 +14,27 @@ namespace Application.Services
         {
         }
 
-        public Response<Bodega> Add(BodegaRequest request)
+        public BodegaResponse Add(BodegaRequest request)
         {
-            Bodega entity = request.ToEntity();
+            Bodega entity = _repository.FindFirstOrDefault(x => x.Codigo == request.Codigo);
+            if (entity != null)
+            {
+                return new BodegaResponse($"Ya existe una bodega con el código {request.Codigo}");
+            }
+
+            entity = new Bodega
+            {
+                Codigo = request.Codigo,
+                Descripcion = request.Descripcion,
+                Direccion = request.Direccion.ToEntity(),
+                Estado = request.Estado,
+                Tipo = request.Tipo
+            };
+
             base.Add(entity);
+
+            _unitOfWork.Commit();
+            
             if (entity.Id == 0)
             {
                 return new BodegaResponse("Bodega no registrada");

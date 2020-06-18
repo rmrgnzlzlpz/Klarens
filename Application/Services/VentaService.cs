@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using Application.Base;
 using Application.Models;
+using Domain.Builders;
 using Domain.Contracts;
 using Domain.Entities;
 
@@ -14,6 +17,11 @@ namespace Application.Services
             _productoService = new ProductoService(_unitOfWork);
         }
 
+        private bool ExisteFactura(string factura)
+        {
+            return _repository.FindBy(x => x.Comprobante.Numero == factura).Any();
+        }
+
         public VentaResponse Add(VentaRequest request)
         {
             Vendedor vendedor = _unitOfWork.VendedorRepository.FindFirstOrDefault(x => x.Persona.Documento.Numero == request.DocumentoVendedor);
@@ -21,12 +29,12 @@ namespace Application.Services
             {
                 return new VentaResponse($"Vendedor con documento {request.DocumentoVendedor} no encontrado");
             }
-            if (_repository.FindFirstOrDefault(x => x.Comprobante.Numero == request.NumeroFactura) != null)
+            if (ExisteFactura(request.NumeroFactura))
             {
                 return new VentaResponse($"La factura {request.NumeroFactura} ya está registrada");
             }
 
-            List<VentaDetalle> Detalles = new List<VentaDetalle>();
+            VentaBuilder ventaBuilder = new VentaBuilder(request.NumeroFactura);
             foreach (var item in request.Detalles)
             {
                 ProductoBodega producto = _productoService.ProductoEnBodega(item.CodigoProducto, item.CodigoBodega);
@@ -41,23 +49,35 @@ namespace Application.Services
                         mensaje: $"El producto {item.CodigoProducto} no está disponible para esa cantidad."
                     );
                 }
-                VentaDetalle detalle = item.ToEntity();
-                detalle.ProductoBodega = producto;
-                Detalles.Add(detalle);
+                ventaBuilder = ventaBuilder.AgregarDetalle(producto, item.Cantidad, item.Precio, item.Descuento);
             }
 
-            Venta venta = request.ToEntity();
-            venta.VentaDetalles = Detalles;
+            if (ventaBuilder.IsOk().Any())
+            {
+                return new VentaResponse(string.Join(',', ventaBuilder.IsOk()));
+            }
 
-            vendedor.Ventas.Add(venta);
+            Venta venta = ventaBuilder.Build(request.Abonado, request.Impuesto);
 
-            _unitOfWork.Commit();
+            vendedor.Vender(venta);
 
-            return new VentaResponse
-            (
-                mensaje: "Venta registrada correctamente",
-                entidad: venta
-            );
+            _unitOfWork.VendedorRepository.Edit(vendedor);
+
+            if (_unitOfWork.Commit() > 0)
+            {
+                return new VentaResponse
+                (
+                    mensaje: "Venta registrada correctamente",
+                    entidad: venta
+                );
+            }
+
+            return new VentaResponse("No se pudo registrar la venta");
+        }
+
+        public VentaResponse All(uint pagina, uint cantidad)
+        {
+            return new VentaResponse("Ventas consultadas", base.Get(page: pagina, size: cantidad));
         }
     }
 }

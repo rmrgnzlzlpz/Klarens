@@ -16,7 +16,7 @@ namespace Domain.Test
         [SetUp]
         public void Setup()
         {
-            VentaBuilder ventaBuilder = new VentaBuilder();
+            VentaBuilder ventaBuilder = new VentaBuilder("KL-V-001");
             var bodega = new Bodega { Codigo = "001", Descripcion = "Principal", Tipo = BodegaTipo.Principal };
 
             leche = new Producto { Codigo = "LAC-001", Descripcion = "Leche de 1L", Nombre = "Leche Klarens 900ml", Precio = 2100, Estado = ProductoEstado.Activo };
@@ -27,9 +27,8 @@ namespace Domain.Test
 
             ventaBuilder = ventaBuilder
                 .AgregarDetalle(lecheBodega, 2, 2100, 500)
-                .AgregarDetalle(yogurtBodega, 5, 1200, 0)
-                .AgregarComprobante(new Comprobante { Numero = "KL-V-0013" });
-
+                .AgregarDetalle(yogurtBodega, 5, 1200, 0);
+                
             venta = ventaBuilder.Build(100000, 10000);
         }
 
@@ -58,7 +57,7 @@ namespace Domain.Test
 
             Exception ex = Assert.Throws<Exception>(() => { builder.Build(); });
 
-            Assert.IsTrue(ex.Message.Contains("No hay una venta válida para devolver"));
+            Assert.IsTrue(ex.Message.Contains("No hay una venta vï¿½lida para devolver"));
         }
     }
 }

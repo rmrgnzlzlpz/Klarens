@@ -1,5 +1,7 @@
+using System.Linq;
 using Application.Base;
 using Application.Models;
+using Domain.Builders;
 using Domain.Contracts;
 using Domain.Entities;
 
@@ -11,13 +13,35 @@ namespace Application.Services
         {
         }
 
-        public Response<Devolucion> Add(DevolucionRequest request)
+        public DevolucionResponse Add(DevolucionRequest request)
         {
-            Devolucion entity = request.ToEntity();
-            base.Add(entity);
-            if (entity.Id == 0)
+            Venta venta = _unitOfWork.VentaRepository.FindBy(x => x.Comprobante.Numero == request.NumeroFactura, includeProperties: "VentaDetalles").FirstOrDefault();
+
+            if (venta == null)
             {
-                return new DevolucionResponse("Devolucion no registrada");
+                return new DevolucionResponse($"Factura {request.NumeroFactura} no encontrada");
+            }
+
+            DevolucionBuilder builder = new DevolucionBuilder(venta);
+
+            foreach (var item in request.Detalles)
+            {
+                Producto producto = _unitOfWork.ProductoRepository.FindFirstOrDefault(x => x.Codigo == item.CodigoProducto);
+                builder = builder.AgregarDetalle(producto, item.Cantidad);
+            }
+
+            if (builder.IsOk().Any())
+            {
+                return new DevolucionResponse(string.Join(',', builder.IsOk()));
+            }
+
+            Devolucion entity = builder.Build();
+            venta.Devolver(entity);
+
+            _unitOfWork.VentaRepository.Edit(venta);
+            if (_unitOfWork.Commit() <= 0)
+            {
+                return new DevolucionResponse("No se pudo registrar la devolución");
             }
             return new DevolucionResponse("Devolucion registrada", entity);
         }

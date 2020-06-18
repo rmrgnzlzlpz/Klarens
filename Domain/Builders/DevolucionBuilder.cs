@@ -13,6 +13,7 @@ namespace Domain.Builders
         public Venta Venta { get; private set; }
         public string Descripcion { get; private set; }
         public List<DevolucionDetalle> Detalles { get; private set; }
+        public int TotalDetalles { get; private set; }
 
         public DevolucionBuilder(Venta venta)
         {
@@ -22,7 +23,9 @@ namespace Domain.Builders
 
         public DevolucionBuilder AgregarDetalle(Producto producto, int cantidad)
         {
+            TotalDetalles++;
             if (Venta == null) return this;
+            if (Venta.VentaDetalles == null) return this;
             var productoBodega = Venta.VentaDetalles.FirstOrDefault(x => x.ProductoBodega.Producto == producto);
             if (productoBodega == null) return this;
 
@@ -59,14 +62,21 @@ namespace Domain.Builders
             }
             if (Detalles.Count < 1)
             {
-                Errores.Add("La venta debe tener mínimo un producto");
+                Errores.Add("La devolución debe tener mínimo un producto");
+            }
+            if (Venta.VentaDetalles == null)
+            {
+                Errores.Add("La venta debe tener mínimo un detalle");
             }
             if (Venta == null)
             {
                 Errores.Add("No hay una venta válida para devolver");
             }
+            if (TotalDetalles < Detalles.Count)
+            {
+                Errores.Add($"No se agregaron todos los detalles ({Detalles.Count} de {TotalDetalles})");
+            }
             return Errores;
-
         }
     }
 }

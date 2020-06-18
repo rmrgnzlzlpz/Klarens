@@ -9,8 +9,8 @@ namespace Application.Base
 {
     public abstract class Service<T> : BaseService, IService<T> where T : BaseEntity
     {
-        readonly IUnitOfWork _unitOfWork;
-        readonly IGenericRepository<T> _repository;
+        public readonly IUnitOfWork _unitOfWork;
+        public readonly IGenericRepository<T> _repository;
         public Service(IUnitOfWork unitOfWork, IGenericRepository<T> repository)
         {
             _unitOfWork = unitOfWork;

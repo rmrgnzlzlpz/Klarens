@@ -14,8 +14,9 @@ namespace Domain.Builders
         public double Abonado { get; private set; }
         public List<string> Errores { get; private set; }
         
-        public VentaBuilder()
+        public VentaBuilder(string numeroFactura)
         {
+            Comprobante = new Comprobante { Numero = numeroFactura, Tipo = ComprobanteTipo.Factura };
             Detalles = new List<VentaDetalle>();
         }
 
@@ -35,12 +36,6 @@ namespace Domain.Builders
                     Descuento = descuento
                 });
             }
-            return this;
-        }
-
-        public VentaBuilder AgregarComprobante(Comprobante comprobante)
-        {
-            Comprobante = comprobante ?? throw new Exception("El comprobante no puede estar vacío");
             return this;
         }
 

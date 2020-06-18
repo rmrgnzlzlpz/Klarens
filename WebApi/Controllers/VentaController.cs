@@ -20,9 +20,16 @@ namespace WebApi.Controllers
         }
 
         [HttpPost("nueva")]
-        public ActionResult<BaseResponse> Nueva(VentaRequest request)
+        public ActionResult<VentaResponse> Nueva(VentaRequest request)
         {
-            BaseResponse response = _service.Add(request);
+            var response = _service.Add(request);
+            return response;
+        }
+
+        [HttpGet("{pagina}/{cantidad}")]
+        public ActionResult<VentaResponse> All(uint pagina, uint cantidad)
+        {
+            var response = _service.All(pagina, cantidad);
             return response;
         }
     }
