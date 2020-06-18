@@ -11,8 +11,13 @@ using NUnit.Framework;
 
 namespace Application.Test
 {
-    public class PersonaTests
+    public class PersonaTests 
     {
+
+        /**
+         * Description = "Como administrador quiero registrar las personas que participarán en la empresa para tener un control de clientes"
+         */
+
         PersonaService personaService;
         IUnitOfWork unitOfWork;
 
@@ -27,7 +32,7 @@ namespace Application.Test
         }
 
         [Test]
-        public void PersonaTest()
+        public void PersonaRepetidaTest()
         {
             PersonaRequest request = new Models.PersonaRequest
             {
@@ -51,8 +56,8 @@ namespace Application.Test
             Assert.AreEqual($"La persona con {request.TipoDocumento} número {request.NumeroDocumento} se encuentra registrada", response);
         }
 
-        [Test(Description = "Como administrador quiero registrar las personas que participarán en la empresa para tener un control de clientes")]
-        public void PersonaRepetidaTest()
+        [Test]
+        public void PersonaNuevaTest()
         {
             Persona persona = personaService.Add(new Models.PersonaRequest
             {

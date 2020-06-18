@@ -3,12 +3,14 @@ using Application.Models;
 using Application.Services;
 using Domain.Contracts;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class BodegaController : ControllerBase
     {
         readonly IUnitOfWork _unitOfWork;
@@ -20,20 +22,20 @@ namespace WebApi.Controllers
         }
 
         [HttpGet("{pagina}/{cantidad}")]
-        public ActionResult<IResponse<Producto>> GetAll(uint pagina = 0, uint cantidad = 10)
+        public ActionResult<BodegaResponse> GetAll(uint pagina = 0, uint cantidad = 10)
         {
             return Ok(_service.GetBy(page: pagina, size: cantidad));
         }
 
-        [HttpGet("codigo")]
-        public ActionResult<IResponse<Producto>> Get(string codigo)
+        [HttpGet("{codigo}")]
+        public ActionResult<BodegaResponse> Get(string codigo)
         {
             var response = _service.GetBy(x => x.Codigo == codigo);
             return Ok(response);
         }
 
         [HttpPost]
-        public ActionResult<IResponse<Producto>> Post(BodegaRequest request)
+        public ActionResult<BodegaResponse> Post(BodegaRequest request)
         {
             var response = _service.Add(request);
             return Ok(response);

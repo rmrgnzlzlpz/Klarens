@@ -44,7 +44,7 @@ namespace Application.Services
 
         public BodegaResponse GetBy(Expression<Func<Bodega, bool>> expression = null, uint page = 0, uint size = 10)
         {
-            return new BodegaResponse("Bodegas consultados", base.Get(expression: expression, page: page, size: size));
+            return new BodegaResponse("Bodegas consultados", base.Get(expression: expression, page: page, size: size, include: "Direccion"));
         }
     }
 }
